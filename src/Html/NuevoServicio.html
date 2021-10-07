@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <title>Nuevo Servicio</title>
+</head>
+<body>
+    <h1 class="text-center p-3 fuente">Nuevo Servicio</h1>
+    <div name="panel" class="d-inline-flex w-100 p-3 gap-5 centrar colorDiv">
+        <img src="img/pencil.png" width="40" height="40">
+            <label for="">Fecha</label>
+            <input type="date" name="" id="" class="form-control entrada w-25" required="true">
+    </div>
+
+    <div name="centro" class="d-inline-flex w-100 p-3 gap-3 centrar colorDiv">
+        <label for="">Codigo</label>
+        <input type="text" name="" id="" class="form-control entrada w-25" placeholder="Codigo" required="true">
+        <img src="img/buscar.png" width="20" height="20">
+        <label for="">Servicio</label>
+        <input type="text" name="" id="" class="form-control entrada w-25" placeholder="Servicio">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Cantidad</label>
+        <input type="number" name="" id="" class="form-control entrada w-25 " placeholder="Cantidad" required="true">
+    </div>
+
+    <div class="d-inline-flex w-100 p-3 gap-4 centrar colorDiv">
+        <label for="">Precio</label>
+        <input type="number" name="" id="" class="form-control entrada w-25" placeholder="Precio">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Estado</label>
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option selected>Selecciona</option>
+            <option value="1">Disponible</option>
+            <option value="2">No disponible</option>
+        </select>
+        <button type="button" class="btn btn-success">Agregar Servicio</button>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped w-100 p-3 table-hover table-bordered border-dark colorDiv3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Servicio</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>4001</td>
+                <td>Tarjeta Credito</td>
+                <td>1000</td>
+                <td>
+                    <input type="number" value="10" disabled="true" class="text-center w-25 sinlimites">
+                </td>
+                <td>
+                    <select class="custom-select mr-sm-2 sinlimites" id="inlineFormCustomSelect" value="1" disabled="true">
+                        <option selected >Disponible</option>
+                        <option >No disponible</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="d-inline-flex gap-2">
+                        <a href="">
+                            <img src="img/modificar.png" width="15" height="15">
+                        </a>
+                        <a href="">
+                            <img src="img/eliminar.png" width="15" height="15">
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>4007</td>
+                <td>Tarjeta Debito</td>
+                <td>2000</td>
+                <td>
+                    <input type="number" value="8" disabled="true" class="text-center w-25 sinlimites">
+                </td>
+                <td>
+                    <select class="custom-select mr-sm-2 sinlimites" id="inlineFormCustomSelect" disabled="true">
+                        <option value="1">Disponible</option>
+                        <option selected>No disponible</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="d-inline-flex gap-2">
+                        <a href="">
+                            <img src="img/modificar.png" width="15" height="15">
+                        </a>
+                        <a href="">
+                            <img src="img/eliminar.png" width="15" height="15">
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div name="acciones" class="d-inline-flex w-100 p-3 gap-5 centrar colorDiv3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-outline-dark">Actualizar</button>
+        <a href="Home.html" target="iframe_a">
+            <button type="button" class="btn btn-danger">Cancelar</button>
+        </a>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Status</h5>
+                    <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+                <div class="modal-body">Servicios Agregados correctamente</div>
+                <div class="modal-footer">
+                    <a href="Home.html" target="iframe_a">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
