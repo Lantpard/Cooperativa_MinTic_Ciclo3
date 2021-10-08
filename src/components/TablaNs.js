@@ -1,10 +1,12 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Form,Image,Table,InputGroup} from "react-bootstrap"
+import {Form,Image,Table,InputGroup, Nav} from "react-bootstrap"
 import "styles/style.css"
 import Modificar from 'media/modificar.png';
 import Eliminar from 'media/eliminar.png';
+import Guardar from 'media/guardar.png';
+import Cancelar from 'media/cancelar.png';
 
 function TablaNs() {
     return (
@@ -34,14 +36,27 @@ function TablaNs() {
                     <span class="">10</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option  value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -56,14 +71,27 @@ function TablaNs() {
                     <span class="">0</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option value="1">Disponible</option>
                         <option selected value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">No disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -78,14 +106,27 @@ function TablaNs() {
                     <span class="">20</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option  value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -100,14 +141,27 @@ function TablaNs() {
                     <span class="">10</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option  value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -122,14 +176,27 @@ function TablaNs() {
                     <span class="">0</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option value="1">Disponible</option>
                         <option selected value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">No disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -144,14 +211,27 @@ function TablaNs() {
                     <span class="">30</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option  value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                    <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:'none'}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -166,14 +246,27 @@ function TablaNs() {
                     <span class="">15</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option  value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                    <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -188,14 +281,27 @@ function TablaNs() {
                     <span class="">0</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option value="1">Disponible</option>
                         <option selected value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">No disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -210,14 +316,27 @@ function TablaNs() {
                     <span class="">50</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option  value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -232,14 +351,27 @@ function TablaNs() {
                     <span class="">7</span>
                 </td>
                 <td>
-                    <Form.Select className= "w-50" aria-label="Default select example">
+                    <Form.Select className= "w-50" aria-label="Default select example" style={{display:'none'}} disabled>
                         <option selected value="1">Disponible</option>
                         <option value="2">No disponible</option>
                     </Form.Select>
+                    <span class="">Disponible</span>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <div className= "d-inline-flex">
+                    <Nav.Link href=""style={{display:''}} >
+                        <Image src={Modificar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:''}} >
+                        <Image src= {Eliminar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src={Guardar} rounded width="15" height="15"/> 
+                    </Nav.Link> 
+                    <Nav.Link href="" style={{display:'none'}} >
+                        <Image src= {Cancelar} rounded width="15" height="15"/>
+                    </Nav.Link> 
+                    </div>
                 </td>
             </tr>
             <tr>

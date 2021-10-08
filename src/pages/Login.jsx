@@ -17,15 +17,14 @@ import Usuarios from 'media/usuarios.png';
 import Entrada from 'media/entrada1.png';
 import Google from 'media/google.png';
 import {Form,Image,Table,Button,Nav,Alert, Card} from "react-bootstrap"
-import { useAuth } from "contexts/AuthContext"
-import { signGooglePop} from "firebase"
+import { signGooglePop,useAuth} from "firebase"
 
 
 
-function Login() {
+export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  //const { login } = useAuth()
+  const { login } = useAuth()
   /* const { signGoogle } =signInWithGooglePopUp() */
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -37,8 +36,8 @@ function Login() {
     try {
       setError("")
       setLoading(true)
-      //await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/Home")
     } catch {
       setError("Failed to log in")
     }
@@ -54,21 +53,22 @@ function Login() {
       <br />
       <Form onSubmit={handleSubmit}>
       <div>
-        <Form.Group className="d-inline-flex w-75 mb-3 gap-3 centrar" controlId="formEmail">
+        <Form.Group id="email" className="d-inline-flex w-75 mb-3 gap-3 centrar" controlId="formEmail">
           <Form.Label>@</Form.Label>
           <Form.Control type="email" ref={emailRef} placeholder="email" required/>
         </Form.Group>
       </div>
       
       <div>
-        <Form.Group className="d-inline-flex w-75 mb-3 gap-3 centrar" controlId="formPassword">
+        <Form.Group id="password" className="d-inline-flex w-75 mb-3 gap-3 centrar" controlId="formPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" ref={passwordRef} placeholder="password" required/>
         </Form.Group>
       </div>
-      <Nav.Link href="/Home">
-        <Button className="btn btn-outline-danger btn-border gap-3" id="singin" disabled={loading} variant="primary">Sign In</Button>{' '}
-      </Nav.Link> 
+      
+        <Button type="submit" className="btn btn-outline-danger btn-border gap-3" id="singin" disabled={loading} variant="primary">
+          Sign In</Button>
+      
       </Form>
       <br />
       <div class="d-inline-flex gap-3 centrar">
@@ -83,5 +83,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

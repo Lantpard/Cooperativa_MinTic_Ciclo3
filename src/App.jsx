@@ -9,17 +9,19 @@ import NuevoServicio from "pages/NuevoServicio";
 import Servicios from "pages/Servicios";
 import Roles from "pages/Roles";
 import Login from "pages/Login";
+import { AuthProvider } from "firebase"
 
 
 function App() {
   return (
     <div className='App'>
       <Router>
+      <AuthProvider>
           <Switch>
             <Route path='/Index'>
               <Index />
             </Route>
-            <Route path='/Login'>
+            <Route path='/Login' pages={Login} >
               <Login />
             </Route>
             <Route path='/NuevaVenta'>
@@ -47,7 +49,7 @@ function App() {
               <Index />
             </Route>
           </Switch>
-
+          </AuthProvider>
       </Router>
     </div>
   );

@@ -1,33 +1,56 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Container,Navbar,Nav,NavDropdown} from "react-bootstrap"
+import {Container,Navbar,Nav,Dropdown,Card} from "react-bootstrap"
 import "styles/style.css"
 
 function BarNav() {
   return (
-    <Navbar collapseOnSelect bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">L</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto gap-4 navegar">
-          <Nav.Link href="/Home">Home</Nav.Link>
-          <Nav.Link href="/NuevaVenta">Nueva Venta</Nav.Link>
-          <Nav.Link href="/EstadoVentas">Estado Ventas</Nav.Link>
-          <Nav.Link href="/NuevoServicio">Nuevo Servicio</Nav.Link>
-          <Nav.Link href="/Servicios">Servicios</Nav.Link>
-          <Nav.Link href="/Roles">Roles</Nav.Link>
-          <NavDropdown title="User" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Setting</NavDropdown.Item>
-            <NavDropdown.Divider />
-              <NavDropdown.Item id="logout" href="/Index">Salir</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+
+    <>
+    <Card >
+  <Card.Header >
+    <Nav className="primary gap-5" variant="tabs"  defaultActiveKey="/Home">
+      <Nav.Link href="#disabled" disabled>
+          Tarif
+        </Nav.Link>
+      <Nav.Item>
+        <Nav.Link href="/Home">Home</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/NuevaVenta">Nueva Venta</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/EstadoVentas">Estado Ventas</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/NuevoServicio">Nuevo Servicio</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/Servicios">Servicios</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/Roles">Roles</Nav.Link>
+      </Nav.Item>
+      <Nav.Item >
+          <Dropdown>
+            <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
+              Profile
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Settings</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Correo</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="/Index">Salir</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+      </Nav.Item>
+    </Nav>
+  </Card.Header>
+  
+</Card>
+      </>
   );
 }
 
