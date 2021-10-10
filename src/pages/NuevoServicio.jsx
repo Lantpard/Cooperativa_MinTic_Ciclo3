@@ -1,5 +1,5 @@
 import React from "react"
-import {Container,Button} from "react-bootstrap"
+import {Container,Button,Card,CardGroup,Image} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import BarNav from "components/BarNav";
 import Client from "components/Cliente";
@@ -14,24 +14,39 @@ import TablaNs from "components/TablaNs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-
+import Logot3 from 'media/logot3.png';
 
 function NuevoServicio() {
     return (
         <div>
+
             <BarNav/>
             <br />
-            <div className="d-block w-100 mb-3 gap-3 centrar fuente" align="center">
-                <h1>Nuevo Servicio</h1>
+            <div className="d-inline-flex w-100 mb-3 gap-3 centrar fuente" align="center">
+            <Image src={Logot3} rounded  height="50"/> 
+                <h1 className="fuente4">Nuevo Servicio</h1>
             </div>
+
             <br />
-            <div className="d-block w-100 mb-3 gap-3">
+
+            <div className="d-block w-100 mb-3 gap-3 centrar ">
+            <CardGroup className="centrar fuente3">
+                <Card className=" cardColor w-100 text-white shablack">
                 <HeaderNs/>
+                </Card>
+                </CardGroup>
             </div>
-            <div className="d-block w-100 mb-3 gap-3 borde">
-                <TablaNs/>
+
+            <div className=" w-100 gap-3 centrar" >
+                
+                <CardGroup>
+                    <Card className=" cardColor w-100 text-white shablack centrar fuente3">
+                    <TablaNs/>
+                    </Card>
+                </CardGroup>
+               
             </div>
-            <Button variant="success">Actualizar Servidor</Button>{' '}
+            
         </div>
     );
 }

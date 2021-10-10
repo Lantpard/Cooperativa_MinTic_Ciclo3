@@ -1,5 +1,5 @@
 import React from "react"
-import {Container,Button} from "react-bootstrap"
+import {Container,Button,Card,CardGroup,Image} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import BarNav from "components/BarNav";
 import Client from "components/Cliente";
@@ -14,24 +14,32 @@ import TablaNs from "components/TablaNs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-
+import Logot3 from 'media/logot3.png';
 
 function Roles() {
     return (
         <div>
             <BarNav/>
             <br />
-            <div className="d-block w-100 mb-3 gap-3 centrar fuente" align="center">
-                <h1>Roles Usuarios</h1>
+            <div className="d-inline-flex w-100 mb-3 gap-3 centrarS" align="center">
+            <Image src={Logot3} rounded  height="50"/> 
+                <h1 className="fuente4">Roles Usuarios</h1>
             </div>
             <br />
             <div className="d-block w-100 mb-3 gap-3">
+            <CardGroup className="centrar fuente3">
+                    <Card className=" cardColor w-100text-white shablack">
                 <HeaderRol/>
+                </Card>
+                </CardGroup>
             </div>
-            <div className="d-block w-100 mb-3 gap-3 borde">
+            <div className="d-block w-100 mb-3 gap-3">
+            <CardGroup className="centrar fuente3">
+                    <Card className=" cardColor w-100text-white shablack">
                 <TablaRol/>
+                </Card>
+                </CardGroup>
             </div>
-            <Button variant="success">Actualizar Servidor</Button>{' '}
         </div>
     );
 }

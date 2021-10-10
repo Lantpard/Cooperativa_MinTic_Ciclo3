@@ -8,8 +8,8 @@ import Eliminar from 'media/eliminar.png';
 
 function TablaEstaV() {
     return (
-
-    <Table striped bordered hover>
+    <div className="d-block centrar w-100 p-3 gap-3 ">
+    <Table striped bordered hover className="borde-rad">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -179,6 +179,7 @@ function TablaEstaV() {
             </tr>
     </tbody>
     </Table>
+    </div>
     );
 }
 

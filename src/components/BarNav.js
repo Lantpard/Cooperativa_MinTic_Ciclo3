@@ -1,40 +1,44 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Container,Navbar,Nav,Dropdown,Card} from "react-bootstrap"
+import {Container,Navbar,Image,Nav,Dropdown,Card} from "react-bootstrap"
+import Logot3 from 'media/logot3.png';
 import "styles/style.css"
 
 function BarNav() {
-  return (
+  
 
+    
+  return (
     <>
-    <Card >
-  <Card.Header >
-    <Nav className="primary gap-5" variant="tabs"  defaultActiveKey="/Home">
-      <Nav.Link href="#disabled" disabled>
-          Tarif
-        </Nav.Link>
-      <Nav.Item>
-        <Nav.Link href="/Home">Home</Nav.Link>
+    <Card className="navColor centrar">
+      <Card.Header >
+          <Nav className=" centrar gap-4 mx-2" variant="tabs"  defaultActiveKey="/Home">
+            <Image src={Logot3} rounded height="40"/> 
+          <Nav.Item>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/Home">Home</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/NuevaVenta">Nueva Venta</Nav.Link>
+        <Nav.Link id="nVenta" className="linkColor gap-5 mx-2" 
+        href="/NuevaVenta"
+        >Nueva Venta</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/EstadoVentas">Estado Ventas</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/EstadoVentas">Estado Ventas</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/NuevoServicio">Nuevo Servicio</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/NuevoServicio">Nuevo Servicio</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/Servicios">Servicios</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/Servicios" 
+        >Servicios</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/Roles">Roles</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/Roles">Roles</Nav.Link>
       </Nav.Item>
       <Nav.Item >
           <Dropdown>
-            <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
+            <Dropdown.Toggle className="linkColor gap-5 mx-2"  variant="Secondary" id="dropdown-basic">
               Profile
             </Dropdown.Toggle>
 

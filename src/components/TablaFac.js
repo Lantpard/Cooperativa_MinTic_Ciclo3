@@ -5,11 +5,17 @@ import {FormControl,Image,Table,InputGroup} from "react-bootstrap"
 import "styles/style.css"
 import Modificar from 'media/modificar.png';
 import Eliminar from 'media/eliminar.png';
+import Acciones from "./Acciones";
 
 function TablaNs() {
+
+    
+
+
+
     return (
 
-    <Table striped bordered hover>
+    <Table striped bordered hover className="borde-rad centrar">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -20,7 +26,7 @@ function TablaNs() {
                 <th scope="col">Subtotal</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="FtBody">
             <tr>
                 <th scope="row">1</th>
                 <td>4001</td>
@@ -34,8 +40,7 @@ function TablaNs() {
                 </td>
                 <td>
                     1000
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                    <Acciones/>
                 </td>
             </tr>
             <tr>
@@ -51,8 +56,7 @@ function TablaNs() {
                 </td>
                 <td>
                     4000
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                    <Acciones/>
                 </td>
             </tr>
             <tr>

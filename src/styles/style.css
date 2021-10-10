@@ -22,25 +22,28 @@
 .centrar{
     align-items: center;
 
+
 }
 
 .inicio{
     border-radius: 10px;
     margin-top: 100px;
-    background-color:rgb(131, 90, 168);
+    background-color: #95aa62;
     
 }
 
 .login{
     border-radius: 10px;
     margin-top: 30px;
-    background-color:rgb(131, 90, 168);
+    background-color:#95aa62;
     
 }
 
 .textox{
     font-size: 13px;
 }
+
+
 
 .celda{
     align-content: "center";
@@ -49,10 +52,13 @@
 
 td {
     text-align: center;
+    
+    color: white;
 }
 
 th {
     text-align: center;
+    color: white;
 }
 
 li a:hover:not(.active) {
@@ -60,7 +66,8 @@ li a:hover:not(.active) {
     border-radius: 10px;
 }
 
-tr:hover {background-color: rgba(137, 43, 226, 0.466);}
+tr:hover {background-color: #5e4790;}
+td.text {color: white;}
 
 li a:hover:active {
     background-color: #04AA6D;
@@ -91,7 +98,7 @@ li a:hover:active {
 }
 
 thead{
-    background-color: cornflowerblue;
+    background-color:#cf962c;
     color: white;
 }
 
@@ -108,14 +115,70 @@ thead{
 }*/
 
 body{
-    background-color: rgba(203,220,247);
+    background-color: #c4b8d9;
     background-size: auto;
     background-repeat: no-repeat;
 
 }
 
 .fuente{
-    font-family: cursive;
-    font-style: oblique;
+    font-family: Lato;
+    font-size: 70px;
+    
+}
+.b-color{
+    background-color: #5e4790;
+}
+
+.cardColor{
+    border-radius: 10px;
+    margin: 20px;
+    background-color: #4a828D;
+    box-shadow: rgba(0, 0, 0, 0.836) 0px 5px 15px;
+}
+.tamper{
+    margin: 10px;
+}
+
+.navColor{
+    background-color: #cf962c;
+
+    color: black;
+    position: sticky;
+    top: 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+.linkColor{
+    background-color: #5e4790;
+    color: white;
+    font-size: 20px;
+    font-family: Lato;
+    
+}
+
+.shablack{
+    box-shadow: rgba(0, 0, 0, 0.856) 0px 5px 15px;
+}
+.borde-rad{
+    box-shadow: rgba(0, 0, 0, 0.856) 0px 5px 15px;
+    border-radius: 10 px;
+}
+
+.fuente2{
+    font-family: Lato;
+    font-size: 30px;
+    
+}
+
+.fuente3{
+    font-family: Lato;
+    
+}
+
+.fuente4{
+    font-family: Lato;
+    font-size: 40px;
     
 }

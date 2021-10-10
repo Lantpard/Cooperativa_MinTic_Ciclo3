@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container,Image } from "react-bootstrap";
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import BarNav from "components/BarNav";
 import Client from "components/Cliente";
@@ -14,7 +14,9 @@ import TablaNs from "components/TablaNs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-import { guardarRegistro, firebase, database } from "../firebase";
+import Logot3 from 'media/logot3.png';
+import { guardarRegistro, firebase, database } from "firebase";
+import { getAuth } from "firebase/auth";
 
 function Home() {
   const guardarDatos = async () => {
@@ -24,6 +26,13 @@ function Home() {
 
     };
 
+    window.onload = async function(){
+      const auth = getAuth();
+      const user = auth.currentUser;
+  
+      console.log(user.displayName);
+      console.log(user.email);
+  }();
 
 
     // Usando Firebase
@@ -45,11 +54,19 @@ function Home() {
       <br />
       <Container>
         <div
-          className="d-block w-100 mb-3 gap-3 centrar fuente text-center"
+          className="d-block w-100 mb-3 gap-3 centrar text-center"
           align="center"
         >
-          <h1>Sistema de Gestión de Ventas</h1>
-          <button onClick={() => guardarDatos()}>Click</button>
+          <h1  className="fuente">Sistema de Gestión de Ventas</h1>
+          <Image src={Logot3} rounded  height="400"/> 
+          <br />
+          <button /* onClick={() => guardarDatos()} */
+          
+          /* onClick={() => {console.log(Nombre)}} */>Click</button>
+          
+          
+
+
         </div>
       </Container>
     </div>

@@ -1,5 +1,5 @@
 import React from "react"
-import {Container} from "react-bootstrap"
+import {Container,Card,CardGroup,Image} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import BarNav from "components/BarNav";
 import Client from "components/Cliente";
@@ -15,29 +15,54 @@ import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
 import Estado from "components/Estado";
-
+import Logot3 from 'media/logot3.png';
 
 function ModificacionVenta() {
     return (
         <div>
             <BarNav/>
             <br />
-            <div className="d-block w-100 mb-3 gap-3 centrar fuente" align="center">
-                <h1>Modificación Venta</h1>
+            <div className="d-inline-flex w-100 mb-3 gap-3 centrar fuente" align="center">
+                <Image src={Logot3} rounded  height="50"/> 
+                <h1 className="fuente4">Modificación Venta</h1>
             </div>
             <br />
             <div className="d-inline-flex w-100 mb-3 gap-3">
-                <div className="d-block w-75 mb-3 gap-3">
-                    <Estado/>
-                    <br />
-                    <br />
-                    <Service/>
-                </div>
-                <div className="d-block w-100 mb-3 gap-3 borde">
+            <div className="w-100">
+            <CardGroup>
+                <Card className=" cardColor w-100 text-white shablack">
+                    
+                    <Card.Body>
                     <HeaderFact/>
                     <TablaFac/>
                     <FooterFact/>
+                    </Card.Body>
+                </Card>
+                </CardGroup>
                 </div>
+                <div className="d-block w-75 mb-3 gap-3">
+                <CardGroup>
+                <Card className=" cardColor w-100 text-white shablack">
+                    
+                    <Card.Body>
+
+                    <Estado/>
+                    </Card.Body>
+                </Card>
+                </CardGroup>
+                    <br />
+                    <br />
+
+                    <CardGroup>
+                <Card className=" cardColor w-100 text-white shablack">
+                    
+                    <Card.Body>
+                    <Service/>
+                    </Card.Body>
+                </Card>
+                </CardGroup>
+                </div>
+                
             </div>
         </div>
     );

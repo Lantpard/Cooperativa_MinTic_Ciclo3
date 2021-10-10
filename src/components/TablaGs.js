@@ -19,7 +19,7 @@ let listaser = []
 
 
 
-function TablaNs() {
+function TablaGs() {
 
     const contendorTarea = document.getElementById('table-body')
 
@@ -93,7 +93,7 @@ function TablaNs() {
 
 
     return (
-    
+    <>
     <div className="d-block centrar w-100 p-3 gap-3 ">
     <Table striped bordered hover className="borde-rad">
         <thead>
@@ -379,8 +379,8 @@ function TablaNs() {
     </Table>
     <div id="table-body"></div>
     </div>
-    
+    </>
     );
 }
 
-export default TablaNs;
+export default TablaGs;

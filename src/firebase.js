@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react"
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { getAuth } from "firebase/auth";
+
 
 const app = firebase.initializeApp({
   apiKey: "AIzaSyDQTVL5O_zaPV_yCIB7fWUl-1yKHIG6ZJY",
@@ -105,6 +107,8 @@ export async function signGooglePop() {
     usuarioActual = respuesta.user;
     registro();
     window.location.href = "/Home";
+    
+
   } catch (error) {
     console.error(error);
     throw new Error(error);

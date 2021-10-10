@@ -1,5 +1,5 @@
 import React from "react"
-import {Container} from "react-bootstrap"
+import {Container, Card, CardGroup,Image} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import BarNav from "components/BarNav";
 import Client from "components/Cliente";
@@ -14,23 +14,31 @@ import TablaNs from "components/TablaNs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-
+import Logot3 from 'media/logot3.png';
 
 function EstadoVentas() {
     return (
         <div>
             <BarNav/>
             <br />
-            <div className="d-block w-100 mb-3 gap-3 centrar fuente" align="center">
-                <h1>Estado Ventas</h1>
+            <div className="d-inline-flex w-100 mb-3 gap-3 centrar" align="center">
+            <Image src={Logot3} rounded  height="50"/> 
+                <h1 className="fuente4">Estado Ventas</h1>
             </div>
             <br />
-            <div className="d-block w-100 mb-3 gap-3">
-                <HeaderEstadoV/>
-            </div>
-            <div className="d-block w-100 mb-3 gap-3 borde">
-                <TablaEstaV/>
-            </div>
+
+            <CardGroup>
+                <Card className=" cardColor w-100 text-white shablack fuente3">
+                    <HeaderEstadoV/>
+                </Card>
+            </CardGroup>
+            
+            <CardGroup>
+                <Card className=" cardColor w-100 text-white shablack fuente3">
+                    <TablaEstaV/>
+                </Card>
+            </CardGroup>
+            
         </div>
     );
 }
