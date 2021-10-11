@@ -2,6 +2,7 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Index from "pages/Index";
 import NuevaVenta from "pages/NuevaVenta";
+import NuevaVenta1 from "pages/NuevaVenta1";
 import Home from "pages/Home";
 import EstadoVentas from "pages/EstadoVentas";
 import ModificacionVenta from "pages/ModificacionVenta";
@@ -26,6 +27,9 @@ function App() {
             </Route>
             <Route path='/NuevaVenta'>
               <NuevaVenta />
+            </Route>
+            <Route path='/NuevaVenta1'>
+              <NuevaVenta1 />
             </Route>
             <Route path='/EstadoVentas'>
               <EstadoVentas />

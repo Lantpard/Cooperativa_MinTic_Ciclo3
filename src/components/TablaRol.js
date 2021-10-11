@@ -5,6 +5,7 @@ import {Form,Image,Table,InputGroup} from "react-bootstrap"
 import "styles/style.css"
 import Modificar from 'media/modificar.png';
 import Eliminar from 'media/eliminar.png';
+import Acciones2 from "components/Acciones2";
 
 function TablaRol() {
     return (
@@ -40,8 +41,7 @@ function TablaRol() {
                     </Form.Select>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                    <Acciones2/>
                 </td>
             </tr>
             <tr>
@@ -62,8 +62,7 @@ function TablaRol() {
                     </Form.Select>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <Acciones2/>
                 </td>
             </tr>
             <tr>
@@ -84,8 +83,7 @@ function TablaRol() {
                     </Form.Select>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <Acciones2/>
                 </td>
             </tr>
             <tr>
@@ -106,8 +104,7 @@ function TablaRol() {
                     </Form.Select>
                 </td>
                 <td>
-                    <Image src={Modificar} rounded width="15" height="15"/>  
-                    <Image src= {Eliminar} rounded width="15" height="15"/>
+                <Acciones2/>
                 </td>
             </tr>
             <tr>

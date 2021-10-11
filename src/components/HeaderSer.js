@@ -1,10 +1,12 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Form,Button} from "react-bootstrap"
+import {Form,Button,Modal} from "react-bootstrap"
 import "styles/style.css"
 
 function HeaderSer() {
+
+    
     return (
     <Form>
         <div name="HeaderSer" className="d-inline-flex w-100 p-3 centrar gap-5">
@@ -40,6 +42,8 @@ function HeaderSer() {
                     
                   >Actualizar Servidor</button>
                 </div>
+
+                
                 
         </div>
     </Form>

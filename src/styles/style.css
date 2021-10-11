@@ -21,6 +21,7 @@
 
 .centrar{
     align-items: center;
+    justify-content: center;
 
 
 }
@@ -123,7 +124,8 @@ body{
 
 .fuente{
     font-family: Lato;
-    font-size: 70px;
+    font-size: 50px;
+    color: #5e4790;
     
 }
 .b-color{
@@ -180,5 +182,6 @@ body{
 .fuente4{
     font-family: Lato;
     font-size: 40px;
+    color: #5e4790;
     
 }

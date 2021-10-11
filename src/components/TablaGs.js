@@ -93,6 +93,7 @@ function TablaGs() {
 
 
     return (
+        
     <>
     <div className="d-block centrar w-100 p-3 gap-3 ">
     <Table striped bordered hover className="borde-rad">
@@ -379,6 +380,8 @@ function TablaGs() {
     </Table>
     <div id="table-body"></div>
     </div>
+
+    
     </>
     );
 }

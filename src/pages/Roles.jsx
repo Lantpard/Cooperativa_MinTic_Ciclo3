@@ -14,14 +14,14 @@ import TablaNs from "components/TablaNs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-import Logot3 from 'media/logot3.png';
+import Logot3 from 'media/isotop.png';
 
 function Roles() {
     return (
         <div>
             <BarNav/>
             <br />
-            <div className="d-inline-flex w-100 mb-3 gap-3 centrarS" align="center">
+            <div className="d-inline-flex w-100 mb-3 gap-3 centrar" >
             <Image src={Logot3} rounded  height="50"/> 
                 <h1 className="fuente4">Roles Usuarios</h1>
             </div>

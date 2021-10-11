@@ -14,7 +14,7 @@ import TablaGs from "components/TablaGs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-import Logot3 from 'media/logot3.png';
+import Logot3 from 'media/isotop.png';
 import Acciones from 'components/Acciones'
 import {database} from 'firebase'
 
@@ -35,7 +35,7 @@ function Servicios() {
     async function listarServicios(){
 
         listaser= await leerServicios();
-        listaser.forEach(function(elemento, indice, array){
+        listaser.forEach(function(elemento, indice, id, array){
             console.log(indice+1,elemento.Servicio, elemento.Precio);
 
 
@@ -150,7 +150,10 @@ function Servicios() {
                     </Card>
                 </CardGroup>
             </div>
-        
+            <button className="btn btn-primary btn-sm mx-5"
+                onClick={() => listarServicios()}>
+                Buscar
+            </button>
         </div>
     );
 }

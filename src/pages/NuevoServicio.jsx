@@ -14,7 +14,7 @@ import TablaNs from "components/TablaNs";
 import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
-import Logot3 from 'media/logot3.png';
+import Logot3 from 'media/isotop.png';
 
 function NuevoServicio() {
     return (

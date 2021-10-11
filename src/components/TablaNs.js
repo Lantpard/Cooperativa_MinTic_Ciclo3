@@ -29,11 +29,6 @@ function TablaNs() {
         listaser.forEach(function(elemento, indice, array){
             console.log(indice+1,elemento.Servicio, elemento.Precio);
 
-
-                
-
-
-            
         })
 
 
@@ -42,12 +37,6 @@ function TablaNs() {
 
                 console.log(user.displayName);
                 console.log(user.email);
-
-
-
-
-
-
 
     }
     
@@ -60,24 +49,6 @@ function TablaNs() {
         respuesta.forEach(function(item){
             //console.log(item.data());
             Servicios.push(item.data())
-            /* console.log(Servicios)
-            console.log(Servicios.length)  */
-
-            /* for(var i=0;i<Servicios.length;++i){
-                console.log(i+1,Servicios[i].Servicio, Servicios[i].Estado)
-                
-                
-            } */
-
-            
-
-
-
-            /* console.log(Servicios[0].Codigo)
-            console.log(Servicios[0].Estado)
-            console.log(Servicios[0].Cantidad)
-            console.log(Servicios[0].Servicio)
-            console.log(Servicios[0].Precio) */
             
         })
         return Servicios
@@ -329,23 +300,6 @@ function TablaNs() {
                 </td>
             </tr>
 
-
-            {/* ingresar datos en la tabla */}
-
-            {/* 
-            
-            {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
-                  <td>{dato.personaje}</td>
-                  <td>{dato.anime}</td>
-                  <td>
-                    <Acciones/>
-                  </td>
-                </tr>
-              ))} 
-              
-              */}
 
 
             <tr>

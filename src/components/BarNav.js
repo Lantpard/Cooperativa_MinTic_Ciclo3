@@ -20,7 +20,7 @@ function BarNav() {
       </Nav.Item>
       <Nav.Item>
         <Nav.Link id="nVenta" className="linkColor gap-5 mx-2" 
-        href="/NuevaVenta"
+        href="/NuevaVenta1"
         >Nueva Venta</Nav.Link>
       </Nav.Item>
       <Nav.Item>

@@ -9,7 +9,7 @@ import Eliminar from 'media/eliminar.png';
 import Guardar from 'media/guardar.png';
 import Cancelar from 'media/cancelar.png';
 
-function Acciones() {
+function Acciones2() {
     const [show, setShow] = React.useState(false);
     const [show1, setShow1] = React.useState(false);
     const [show2, setShow2] = React.useState(false);
@@ -33,23 +33,29 @@ function Acciones() {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>
-                <Modal.Title>Editar Servicio</Modal.Title>
+                <Modal.Title>Editar Usuario</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="d-block w-100 mb-3 gap-3 mx-2 centrar ">
                     <div className="d-inline-flex w-100 mb-3 gap-3 centrar ">
-                        <label className="mx-2 w-25" htmlFor="">Servicio</label>
+                        <label className="mx-2 w-25" htmlFor="">email</label>
                         <input className="mx-2 w-50"type="text" name="" id="" />
                     </div>
                     <br />
                     <div className="d-inline-flex w-100 mb-3 gap-3 centrar ">
-                    <label className="mx-2 w-25" htmlFor="">Precio</label>
-                    <input className="mx-2 w-50" type="number" name="" id="" />
+                    <label className="mx-2 w-25" htmlFor="">Nombre</label>
+                    <input className="mx-2 w-50" type="text" name="" id="" />
                     </div>
                     <br />
                     <div className="d-inline-flex w-100 mb-3 gap-3 centrar ">
-                    <label className="mx-2 w-25"htmlFor="">Cantidad</label>
-                    <input className="mx-2 w-50" type="numbre" name="" id="" />
+                    <Form.Group className="d-inline-flex w-100 mb-3 gap-3 mx-2 centrar" controlId="formNomCantidad">
+                    <Form.Label className="w-25 mx-2">Perfil</Form.Label>
+                    <Form.Select className= "mx-2 w-50" aria-label="Default select example">
+                        <option>Selecciona</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Vendedor</option>
+                    </Form.Select>
+                </Form.Group>
                     </div>
                     <br />
                     <div className="d-inline-flex w-100 mb-3 gap-3 centrar ">
@@ -57,8 +63,8 @@ function Acciones() {
                     <Form.Label className="w-25 mx-2">Estado</Form.Label>
                     <Form.Select className= "mx-2 w-50" aria-label="Default select example">
                         <option>Selecciona</option>
-                        <option value="1">Disponible</option>
-                        <option value="2">No disponible</option>
+                        <option value="1">Autorizado</option>
+                        <option value="2">No Autorizado</option>
                     </Form.Select>
                 </Form.Group>
                     </div>
@@ -80,9 +86,9 @@ function Acciones() {
                 <Modal.Header>
                 <Modal.Title>Status</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Servicio Actualizado con Exito</Modal.Body>
+                <Modal.Body>Usuairo Actualizado con Exito</Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" href="/NuevoServicio" onClick={handleClose1}>
+                <Button variant="primary" href="/Roles" onClick={handleClose1}>
                     Cerrar
                 </Button>
                 </Modal.Footer>
@@ -94,7 +100,7 @@ function Acciones() {
                 </Modal.Header>
                 <Modal.Body>Operacion Cancelada</Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" href="/NuevoServicio" onClick={handleClose2}>
+                <Button variant="primary" href="/Roles" onClick={handleClose2}>
                     Cerrar
                 </Button>
                 </Modal.Footer>
@@ -103,5 +109,5 @@ function Acciones() {
     );
 }
 
-export default Acciones;
+export default Acciones2;
 

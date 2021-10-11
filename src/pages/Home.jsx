@@ -57,12 +57,15 @@ function Home() {
           className="d-block w-100 mb-3 gap-3 centrar text-center"
           align="center"
         >
-          <h1  className="fuente">Sistema de Gestión de Ventas</h1>
-          <Image src={Logot3} rounded  height="400"/> 
           <br />
-          <button /* onClick={() => guardarDatos()} */
+          <br />
+          <h1  className="fuente">Sistema de Gestión de Ventas</h1>
+          <br />
+          <Image src={Logot3} rounded  height="200"/> 
+          <br />
+          {/* <button  onClick={() => guardarDatos()}
           
-          /* onClick={() => {console.log(Nombre)}} */>Click</button>
+          onClick={() => {console.log(Nombre)}} >Click</button> */}
           
           
 

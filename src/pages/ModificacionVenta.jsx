@@ -5,7 +5,7 @@ import BarNav from "components/BarNav";
 import Client from "components/Cliente";
 import Service from "components/Servicio";
 import TablaFac from "components/TablaFac";
-import FooterFact from "components/FooterFact";
+import FooterEfact from "components/FooterEfact";
 import HeaderFact from "components/HeaderFact";
 import HeaderEstadoV from "components/HeaderEstadoV";
 import TablaEstaV from "components/TablaEstaV";
@@ -15,7 +15,7 @@ import HeaderSer from "components/HeaderSer";
 import HeaderRol from "components/HeaderRol";
 import TablaRol from "components/TablaRol";
 import Estado from "components/Estado";
-import Logot3 from 'media/logot3.png';
+import Logot3 from 'media/isotop.png';
 
 function ModificacionVenta() {
     return (
@@ -35,7 +35,7 @@ function ModificacionVenta() {
                     <Card.Body>
                     <HeaderFact/>
                     <TablaFac/>
-                    <FooterFact/>
+                    <FooterEfact/>
                     </Card.Body>
                 </Card>
                 </CardGroup>
@@ -62,6 +62,8 @@ function ModificacionVenta() {
                 </Card>
                 </CardGroup>
                 </div>
+
+
                 
             </div>
         </div>

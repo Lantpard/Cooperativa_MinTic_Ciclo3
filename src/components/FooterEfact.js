@@ -4,7 +4,7 @@ import React from "react"
 import {Form,Button,Modal} from "react-bootstrap"
 import "styles/style.css"
 
-function FooterFact() {
+function FooterEfact() {
 
     const [show, setShow] = React.useState(false);
 
@@ -36,7 +36,7 @@ function FooterFact() {
 
             
 
-            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={handleShow}>Generar Factura</Button>{' '}
+            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={handleShow}>Actualizar Factura</Button>{' '}
             
             
             
@@ -48,7 +48,7 @@ function FooterFact() {
                 <Modal.Header>
                 <Modal.Title>Status</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Factura Exitosa</Modal.Body>
+                <Modal.Body>Modificacion Exitosa</Modal.Body>
                 <Modal.Footer>
                 <Button variant="primary" href="/EstadoVentas" onClick={handleClose}>
                     Cerrar
@@ -61,5 +61,5 @@ function FooterFact() {
     );
 }
 
-export default FooterFact;
+export default FooterEfact;
 

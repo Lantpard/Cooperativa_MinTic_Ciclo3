@@ -7,7 +7,7 @@ import "styles/style.css"
 function Estado() {
     return (
     <Form>
-        <div name="datos" class="d-block centrar w-100 p-3 gap-3 borde">
+        <div name="datos" class="d-block centrar w-100 p-3 gap-3">
             <Form.Group className="d-inline-flex w-50 mb-2 gap-3" controlId="formEstado">
                 <Form.Label>Estado</Form.Label>
                 <Form.Select className= "w-50" aria-label="Default select example">
@@ -17,6 +17,7 @@ function Estado() {
                     <option value="3">Cancelada</option>
                 </Form.Select>
             </Form.Group>
+            
         </div>
     </Form>
     );
