@@ -1,21 +1,8 @@
 import React from "react";
 import { Container,Image } from "react-bootstrap";
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
-import BarNav from "components/BarNav";
-import Client from "components/Cliente";
-import Service from "components/Servicio";
-import TablaFac from "components/TablaFac";
-import FooterFact from "components/FooterFact";
-import HeaderFact from "components/HeaderFact";
-import HeaderEstadoV from "components/HeaderEstadoV";
-import TablaEstaV from "components/TablaEstaV";
-import HeaderNs from "components/HeaderNs";
-import TablaNs from "components/TablaNs";
-import HeaderSer from "components/HeaderSer";
-import HeaderRol from "components/HeaderRol";
-import TablaRol from "components/TablaRol";
 import Logot3 from 'media/logot3.png';
-import { guardarRegistro, firebase, database } from "firebase";
+import { database } from "firebase";
 import { getAuth } from "firebase/auth";
 
 function Home() {
@@ -32,6 +19,7 @@ function Home() {
   
       console.log(user.displayName);
       console.log(user.email);
+
   }();
 
 
@@ -50,7 +38,7 @@ function Home() {
 
   return (
     <div>
-      <BarNav />
+      
       <br />
       <Container>
         <div
@@ -66,10 +54,10 @@ function Home() {
           {/* <button  onClick={() => guardarDatos()}
           
           onClick={() => {console.log(Nombre)}} >Click</button> */}
-          
-          
+          {/* <a href="" className="btn text-primary"><i className="fas fa-pencil-alt">leo</i></a>
+          <a href="" className="btn text-danger"><i className="far fa-trash-alt">an</i></a>
 
-
+ */}
         </div>
       </Container>
     </div>

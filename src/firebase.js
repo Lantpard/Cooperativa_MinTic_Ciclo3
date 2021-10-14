@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { getAuth } from "firebase/auth";
+
 
 
 const app = firebase.initializeApp({

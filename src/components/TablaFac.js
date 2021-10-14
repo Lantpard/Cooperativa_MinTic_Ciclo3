@@ -2,11 +2,8 @@ import React from "react"
 import { nanoid } from 'nanoid';
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {FormControl,Image,Table,InputGroup} from "react-bootstrap"
+import {Table} from "react-bootstrap"
 import "styles/style.css"
-import Modificar from 'media/modificar.png';
-import Eliminar from 'media/eliminar.png';
-import Acciones from "./Acciones";
 
 function TablaNs() {
 

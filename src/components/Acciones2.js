@@ -3,11 +3,10 @@ import React from "react"
 /* import Index from "pages/index" */
 
 import "styles/style.css"
-import {Form,Image,Table,InputGroup, Nav, Modal, Button} from "react-bootstrap"
+import {Form,Image, Nav, Modal, Button} from "react-bootstrap"
 import Modificar from 'media/modificar.png';
 import Eliminar from 'media/eliminar.png';
-import Guardar from 'media/guardar.png';
-import Cancelar from 'media/cancelar.png';
+
 
 function Acciones2() {
     const [show, setShow] = React.useState(false);

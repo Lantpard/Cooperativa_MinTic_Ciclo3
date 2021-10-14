@@ -1,7 +1,7 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Form,Button} from "react-bootstrap"
+import {Form} from "react-bootstrap"
 import "styles/style.css"
 
 function HeaderFact() {

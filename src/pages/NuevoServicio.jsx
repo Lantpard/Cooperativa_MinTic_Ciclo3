@@ -20,7 +20,7 @@ function NuevoServicio() {
     return (
         <div>
 
-            <BarNav/>
+            
             <br />
             <div className="d-inline-flex w-100 mb-3 gap-3 centrar fuente" align="center">
             <Image src={Logot3} rounded  height="50"/> 

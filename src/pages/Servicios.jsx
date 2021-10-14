@@ -1,21 +1,12 @@
 import React from "react"
-import {Container,Button,Card,CardGroup,Image} from "react-bootstrap"
+import {Card,CardGroup,Image} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
-import BarNav from "components/BarNav";
-import Client from "components/Cliente";
-import Service from "components/Servicio";
-import TablaFac from "components/TablaFac";
-import FooterFact from "components/FooterFact";
-import HeaderFact from "components/HeaderFact";
-import HeaderEstadoV from "components/HeaderEstadoV";
-import TablaEstaV from "components/TablaEstaV";
-import HeaderNs from "components/HeaderNs";
+
 import TablaGs from "components/TablaGs";
 import HeaderSer from "components/HeaderSer";
-import HeaderRol from "components/HeaderRol";
-import TablaRol from "components/TablaRol";
+
 import Logot3 from 'media/isotop.png';
-import Acciones from 'components/Acciones'
+
 import {database} from 'firebase'
 
 import { getAuth } from "firebase/auth";
@@ -129,7 +120,7 @@ function Servicios() {
 
     return (
         <div>
-            <BarNav/>
+            
             <br />
             <div className="d-inline-flex w-100 mb-3 gap-3 centrar fuente" align="center">
             <Image src={Logot3} rounded  height="50"/> 

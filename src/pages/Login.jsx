@@ -1,22 +1,7 @@
 import React, { useRef, useState } from "react"
-import { Link, useHistory } from "react-router-dom"
-import BarNav from "components/BarNav";
-import Client from "components/Cliente";
-import Service from "components/Servicio";
-import TablaFac from "components/TablaFac";
-import FooterFact from "components/FooterFact";
-import HeaderFact from "components/HeaderFact";
-import HeaderEstadoV from "components/HeaderEstadoV";
-import TablaEstaV from "components/TablaEstaV";
-import HeaderNs from "components/HeaderNs";
-import TablaNs from "components/TablaNs";
-import HeaderSer from "components/HeaderSer";
-import HeaderRol from "components/HeaderRol";
-import TablaRol from "components/TablaRol";
-import Usuarios from 'media/usuarios.png';
-import Entrada from 'media/entrada1.png';
+import { useHistory } from "react-router-dom"
 import Google from 'media/google.png';
-import {Form,Image,Table,Button,Nav,Alert, Card} from "react-bootstrap"
+import {Form,Image,Button,Nav,Alert} from "react-bootstrap"
 import { signGooglePop,useAuth} from "firebase"
 import tarif2 from 'media/logot3.png';
 

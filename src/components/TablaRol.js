@@ -3,8 +3,6 @@ import React from "react"
 /* import Index from "pages/index" */
 import {Form,Image,Table,InputGroup} from "react-bootstrap"
 import "styles/style.css"
-import Modificar from 'media/modificar.png';
-import Eliminar from 'media/eliminar.png';
 import Acciones2 from "components/Acciones2";
 
 function TablaRol() {

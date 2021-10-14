@@ -1,7 +1,7 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Container,Navbar,Image,Nav,Dropdown,Card} from "react-bootstrap"
+import {Image,Nav,Dropdown,Card} from "react-bootstrap"
 import Logot3 from 'media/logot3.png';
 import "styles/style.css"
 
@@ -20,7 +20,7 @@ function BarNav() {
       </Nav.Item>
       <Nav.Item>
         <Nav.Link id="nVenta" className="linkColor gap-5 mx-2" 
-        href="/NuevaVenta1"
+        href="/NuevaVenta3"
         >Nueva Venta</Nav.Link>
       </Nav.Item>
       <Nav.Item>

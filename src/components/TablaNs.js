@@ -1,12 +1,8 @@
 import React from "react"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 /* import Index from "pages/index" */
-import {Form,Image,Table,InputGroup, Nav, Button} from "react-bootstrap"
+import {Form,Table,InputGroup} from "react-bootstrap"
 import "styles/style.css"
-import Modificar from 'media/modificar.png';
-import Eliminar from 'media/eliminar.png';
-import Guardar from 'media/guardar.png';
-import Cancelar from 'media/cancelar.png';
 import Acciones from 'components/Acciones'
 import {database} from 'firebase'
 

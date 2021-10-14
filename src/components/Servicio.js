@@ -8,16 +8,16 @@ import {database} from 'firebase'
 import { getAuth } from "firebase/auth";
 
 /* import {handleFormulario,editar,handleGuardarEditar, handleDeshacer} from "pages/NuevaVenta" */
-import {leo} from "pages/NuevaVenta"
+
 
 
 
 let listaser = []
-let data=[]
+
 
 function Service() {
 
-    const contendorTarea = document.getElementById('table-body')
+    /* const contendorTarea = document.getElementById('table-body') */
 
     async function listarServicios(){
 
