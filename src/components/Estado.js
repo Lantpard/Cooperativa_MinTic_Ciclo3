@@ -11,7 +11,7 @@ function Estado() {
             <Form.Group className="d-inline-flex w-50 mb-2 gap-3" controlId="formEstado">
                 <Form.Label>Estado</Form.Label>
                 <Form.Select className= "w-50" aria-label="Default select example">
-                    <option>Selecciona</option>
+                    <option disabled>Selecciona</option>
                     <option value="1">Entregado</option>
                     <option value="2">En progreso</option>
                     <option value="3">Cancelada</option>

@@ -13,6 +13,7 @@ import Login from "pages/Login";
 import { AuthProvider } from "firebase"
 
 import PrivateLayout from 'Layouts/PrivateLayout';
+import PrivateLayout2 from 'Layouts/PrivateLayout2';
 
 
 /* import PublicLayout from 'layouts/PublicLayout';
@@ -35,6 +36,8 @@ function App() {
 
 <Router>
             <Switch>
+
+              {/* Ruta Administrador */}
               <Route path={['/Home', '/NuevaVenta3', '/EstadoVentas', '/ModificacionVenta', '/NuevoServicio', '/Roles', '/Servicios']}>
                 <PrivateLayout>
                   <Switch>
@@ -66,10 +69,13 @@ function App() {
                       <Servicios />
                     </Route>
 
+                    <Route path='*'>
+                      <h1>404 Not found</h1>
+                    </Route>
+
                   </Switch>
                 </PrivateLayout>
               </Route>
-
 
               <Route path={['/Login']}>
               <AuthProvider>
@@ -96,9 +102,78 @@ function App() {
               </Route>
 
 
-            </Switch>
-          </Router>
 
+            </Switch>
+</Router>
+{/* Ruta Vendedor */}
+{/* <Router>
+            <Switch>
+              
+              <Route path={['/Home', '/NuevaVenta3', '/EstadoVentas', '/ModificacionVenta']}>
+                <PrivateLayout2>
+                  <Switch>
+                    <Route path='/Home'>
+                      <Home />
+                    </Route>
+
+                    <Route path='/NuevaVenta3'>
+                      <NuevaVenta3 />
+                    </Route>
+
+                    <Route path='/EstadoVentas'>
+                      <EstadoVentas />
+                    </Route>
+
+                    <Route path='/ModificacionVenta'>
+                      <ModificacionVenta />
+                    </Route>
+
+                    <Route path='/NuevoServicio'>
+                      <NuevoServicio />
+                    </Route>
+
+                    <Route path='/Roles'>
+                      <Roles />
+                    </Route>
+
+                    <Route path='/Servicios'>
+                      <Servicios />
+                    </Route>
+
+                    <Route path='*'>
+                      <h1>404 Not found</h1>
+                    </Route>
+
+                  </Switch>
+                </PrivateLayout2>
+              </Route>
+
+
+              <Route path={['/Login']}>
+              <AuthProvider>
+                
+                  <Switch>
+                    <Route path='/Login'>
+                      <Login />
+                    </Route>
+                    
+                  </Switch>
+                
+                </AuthProvider>
+              </Route>
+
+
+              <Route path={['/']}>
+                
+                  <Route path='/'>
+                    <Index />
+                  </Route>
+                
+              </Route>
+
+            </Switch>
+</Router>
+ */}
 
 
       {/* <Router>

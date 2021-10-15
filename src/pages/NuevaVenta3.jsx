@@ -1,24 +1,11 @@
-import React from "react"
+import React, { useEffect, useState, useRef }  from "react"
 import { nanoid } from 'nanoid';
-import {Container,Card,CardGroup,Button,Image,Modal,Form,Table} from "react-bootstrap"
-/* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
-import BarNav from "components/BarNav";
-import Client from "components/Cliente";
-import Service from "components/Servicio";
-import TablaFac from "components/TablaFac";
-import FooterFact from "components/FooterFact";
-import HeaderFact from "components/HeaderFact";
-import HeaderEstadoV from "components/HeaderEstadoV";
-import TablaEstaV from "components/TablaEstaV";
-import HeaderNs from "components/HeaderNs";
-import TablaNs from "components/TablaNs";
-import HeaderSer from "components/HeaderSer";
-import HeaderRol from "components/HeaderRol";
-import TablaRol from "components/TablaRol";
+import {Card,CardGroup,Button,Image,Modal,Form,Table} from "react-bootstrap"
+
 import {database} from 'firebase'
 import Logot3 from 'media/isotop.png';
 import { getAuth } from "firebase/auth";
-import Acciones from "components/Acciones";
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
@@ -29,85 +16,86 @@ export let leo="hola";
 
 var listaser = []
 
-let listaService = []
-
 var uNombre=""
 var uEmail=""
 
 
-    /* let resultados=''
-    const contenedor = document.getElementById('FtBody')
-    //const modalItems = new bootstrap.Modal(document.getElementById('myModal')) 
-    const fecha=document.getElementById('fFecha')
-    const nFactura=document.getElementById('fNfactura')
-    const total=document.getElementById('fTotal')
-    const vendedor=document.getElementById('fVendedor')
-    const descripcion = document.getElementById('fDescrip')
-    const cedula=document.getElementById('fCcedula')
-    const nombre=document.getElementById('fCnombre')
-    const codigox=document.getElementById('fCodigo')
-    const servicio=document.getElementById('fServicio')
-    const cantidad=document.getElementById('fCantidad')
-    const precio=document.getElementById('fPrecio')
- */
-    const vendedor=document.getElementById('fVendedor')
-    const nFactura=document.getElementById('nFactura')
-    /* let serviciox=document.getElementById('fServiciox').value
-    let preciox=document.getElementById('fServiciox').value */
 
 function NuevaVenta1() {
 
      //nueva tarea
-     const [tarea, setTarea] = React.useState('')
-     const [codigo, setCodigo] = React.useState('')
-     const [cantidad, setCantidad] = React.useState('')
-     const [precio, setPrecio] = React.useState('')
-     var [listaTarea, setListaTarea] = React.useState([])
-     var [listaTarea1, setListaTarea1] = React.useState([])
-     var [firstClick, setFirstClick] = React.useState('')
-     const buttonx=document.getElementById("filtrar")
-     firstClick=false
+     const [tarea, setTarea] = useState('')
+     const [codigo, setCodigo] = useState('')
+     const [cantidad, setCantidad] = useState('')
+     const [precio, setPrecio] = useState('')
+     const [total, setTotal] = useState('')
+     const [vendedor, setVendedor] = useState('')
+     const [nFactura, setNfactura] = useState('')
+     const [nombre, setNombre] = useState('')
+     const [cedula, setCedula] = useState('')
+     const [descripcion, setDescripcion] = useState('')
+     const [fecha, setFecha] = useState('')
+
+     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+     const [servicios, setServicios] = useState([]);
+
+
+    const [listaTarea, setListaTarea] = useState([])
+    const [FacturaLista, setFacturaLista] = useState([]);
+    const [rege, setRege] = useState([])
+    
+   
  
       // Estados de modificacion
-      const [editar, setEditar] = React.useState(false)
-      const [filtrar, setFiltrar] = React.useState(false)
-      const [id, setId] = React.useState('')
-      const [code, setCode] = React.useState('')
+      const [editar, setEditar] = useState(false)
+      
+      const [id, setId] = useState('')
+      
 
-      const [show, setShow] = React.useState(false);
+      const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-    const contendorTarea = document.getElementById('table-body')
 
+///////////////
+      useEffect(() => {
+        
+        if (ejecutarConsulta) {
+          
+          ///////
+          listarServicios()
+
+
+          setEjecutarConsulta(false);
+        }
+      }, [ejecutarConsulta]);
+////////////
 
     
     async function listarServicios(){
         
         listaser= await leerServicios();
-        listaser.forEach(function(elemento, indice, array){
-            console.log(indice+1,elemento.Servicio, elemento.Precio,elemento.Codigo);
-            
-        })
+        
 
-                /* const auth = getAuth();
+                const auth = getAuth();
                 const user = auth.currentUser;
                  uNombre=user.displayName
                 uEmail=user.email
-                console.log(uNombre);
-                console.log(uEmail);
-                vendedor.value=uNombre 
-                console.log(listaser) */
+                
+                setVendedor(uNombre) 
+                setNfactura("00001")
+                
 
                 for(var i=0;i<listaser.length;++i){
-                  console.log(listaser[i].Codigo,Number(codigo))
+                  
                   if(listaser[i].Codigo===Number(codigo)){
-                    document.getElementById('fServiciox').value=listaser[i].Servicio
-                    document.getElementById('fPreciox').value=listaser[i].Precio
+                    setTarea(listaser[i].Servicio)
+                    setPrecio(listaser[i].Precio)
                     break;
                   }else{
-                    document.getElementById('fServiciox').value="Servicio no existe"
+                    setTarea("")
+                    setPrecio("")
                   }
                 }
 
@@ -115,26 +103,23 @@ function NuevaVenta1() {
     
 
     async function leerServicios(){
-        const Servicios = []
+        const servicex=[]
         const respuesta = await database.collection('Servicios').get()
 
         
         respuesta.forEach(function(item){
             //console.log(item.data());
-            Servicios.push(item.data())
+            servicex.push(item.data())
             
         })
-        return Servicios
+        setServicios(servicex)
+        return servicex
+        
 
         
     }
     
-    
-    
-  
 
-   
-    
 
     const handleInput = (e) => {
         // console.log(e.target.value);
@@ -157,18 +142,39 @@ function NuevaVenta1() {
     }
 
     const handleInput3 = (e) => {
-      // console.log(e.target.value);
-      // Asignacion al tarea
-      //setTarea(e.target.value)
+      
       setPrecio(e.target.value)
   }
+
+  const handleInput4 = (e) => {
+      
+    setFecha(e.target.value)
+}
+
+const handleInput5 = (e) => {
+      
+  setDescripcion(e.target.value)
+}
+
+const handleInput6 = (e) => {
+      
+  setCedula(e.target.value)
+}
+
+const handleInput7 = (e) => {
+      
+  setNombre(e.target.value)
+}
+
+
+
 
     const handleFormulario = (e) => {
         e.preventDefault()
 
     // Validacion que el campo no esta vacio
-    if (!codigo.trim() || !cantidad.trim() ) {
-      console.log('Debes ingresar un codigo')
+    if (!codigo.trim() || !cantidad.trim() || !tarea.trim()) {
+      
       return
     }
 
@@ -186,20 +192,19 @@ function NuevaVenta1() {
       }
     ])
 
+     
+
+
     // Limpiar el estado
     setCodigo('')
     setTarea('')
     setCantidad('')
     setPrecio('')
 
-    console.log('Entro');
-    
   }
 
-
   const handleEliminar = (id) => {
-    console.log(id);
-
+    
     // Filtrar los elementos que no tengan el id que recibimos por parametro o que sea diferente
     const arregloTemporal = listaTarea.filter((elemento) => {
       return elemento.id !== id
@@ -210,96 +215,28 @@ function NuevaVenta1() {
   }
 
   const handleEditar = (task) => {
-    console.log(task)
-
+    
     setTarea(task.tarea)
     setCodigo(task.codigo)
     setCantidad(task.cantidad)
     setEditar(true)
     setId(task.id)
     setPrecio(task.precio)
-    console.log("los valores a editar son:",task.tarea,task.codigo,task.cantidad,task.id,task.precio)
-  }
-
-  
-  //document.getElementById("filtro").value
-
-  const handleFiltrar = (code) => {
     
-      
-      if(!code.trim()){
-
-      if(listaTarea.length<listaTarea1.length){
-        /* setListaTarea(listaTarea1) */
-        console.log('entra a lista1')
-      }else{
-        console.log('entra a lista')
-      setListaTarea(listaTarea)
-      console.log('filtro 0')
-      console.log('listaTarea',listaTarea)
-      console.log('listaTarea1',listaTarea1)
-      console.log('el valord e fistClick es:',firstClick)}
-
-
-    }else
-    {
-      console.log('ingreso al else');
-      console.log('el valord e fistClick es:',firstClick)
-      if(firstClick ==false){
-        console.log(code);
-        console.log("ingreso al click");
-        // Filtrar los elementos que no tengan el id que recibimos por parametro o que sea diferente
-        const arregloTemporal = listaTarea.filter((elemento) => {
-          
-          setListaTarea1(listaTarea)
-          if(elemento.codigo==code){
-          return elemento;
-          }
-        
-          
-          buttonx.disabled=true
-          
-          // return !(elemento.id === id)
-        })
-
-       
-        
-        setListaTarea(arregloTemporal)
-        console.log('filtro con valor')
-        console.log('listaTarea',listaTarea)
-        console.log('listaTarea1',listaTarea1)
-        
-      
-        setFirstClick(true)
-    }
-  }
-    
-
-  }
-
-
-  const handleDeshacer = () => {
-    if(code==""){}else{
-    setCode('')
-    setListaTarea(listaTarea1)
-    setFirstClick(false)
-    buttonx.disabled=false
-    }
   }
 
   const handleGuardarEditar = (e) => {
     e.preventDefault()
-    console.log(listaTarea)
-    if (!codigo.trim() || !tarea.trim() || !precio.trim() || !cantidad.trim() ) {
-      console.log('Debes ingresar un codigo')
+    
+    if (!codigo.trim() || !tarea.trim() || !cantidad.trim() ) {
+      
       return
     }
 
     const arregloTemporal = listaTarea.map((item) => {
       return item.id === id ? { id: id, codigo:codigo,tarea: tarea,precio:precio,cantidad:cantidad } : item
     })
-
-    console.log(arregloTemporal)
+    
     setListaTarea(arregloTemporal)
 
     // Limpiar el estado
@@ -307,60 +244,88 @@ function NuevaVenta1() {
     setCodigo('')
     setCantidad('')
     setPrecio('')
-
     setEditar(false)
-    console.log("Filtrando")
-  
+
   }
 
-  /* React.useEffect(() => { */
-      
-      
+
+    const notify = () => {
+    
+      SumarProductos()
+    
+    if(tarea==""){
+      toast.error("Cogido no valido");
+    }else{
+    toast.success("Servicio Agregado")
+      };
+
+        
+    }
+    
+
+    const SumarProductos = ()=>{
+      console.log("primera: ",listaTarea)
+    let suma=0
+      /* setRege(listaTarea)
+        rege.map((task) => (
   
+         suma=suma+( task.cantidad*task.precio)
+  
+        )) */
+
+        for(var i=0;i<listaTarea.length;++i){
+          suma+=( listaTarea[i].cantidad*listaTarea[i].precio)
+        }
+          console.log("segunda",listaTarea)
+        setTotal(suma)
+    }
 
 
-      /* function traerbase(){ */
-        const booksRef = database.collection("Servicios");
+    const  GuardarFactura= ()=>{
 
-      booksRef
-      .get()
-      .then((results) => {
-        const data = results.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+      console.log("primera",listaTarea);
+
+      setFacturaLista([
         
-        // [ { id: 'glMeZvPpTN1Ah31sKcnj', titulo: 'El gran Gatsby' } ]
-        
-        data.forEach(function(elemento, indice, array){
-          /* console.log(indice+1,elemento.Servicio, elemento.Precio,elemento.Codigo); */
-         
+        {
+          id: nanoid(),
+          // tarea: 'valor.... la variable'
+          // tarea: tarea
+          cedula,
+          nFactura,
+          descripcion,
+          fecha,
+          listaTarea
+        }
+      ])
 
-      });
-      /* } */
+      console.log("segunda",FacturaLista);
 
-      console.log(data[0].id,data[0].Servicio)
+        /* setCedula("")
+        setNombre("")
+        setNfactura("")
+        setFecha("")
+        setDescripcion("")
+        setTotal("")
+        setVendedor("")
+        handleShow() */
 
+    }
 
-      const auth = getAuth();
-                /* const user = auth.currentUser;
-                 uNombre=user.displayName
-                uEmail=user.email
-                console.log(uNombre);
-                console.log(uEmail);
-                vendedor.value=uNombre 
-                nFactura.value=uEmail
-                console.log(vendedor.value) */
-        
-    })
+    const buscarServicio=()=>{
 
-   /*  }); */
-
-
-
-
-  const notify = () => toast.success("Servicio Agregado");
-
+      for(var i=0;i<servicios.length;++i){
+                  
+        if(servicios[i].Codigo===Number(codigo)){
+          setTarea(servicios[i].Servicio)
+          setPrecio(servicios[i].Precio)
+          break;
+        }else{
+          setTarea("")
+          setPrecio("")
+        }
+      }
+    }
 
 
     return (
@@ -385,12 +350,12 @@ function NuevaVenta1() {
                           <div name="HeaderFact" className="d-block w-100 p-3 centrar">
                               <Form.Group className="d-inline-flex gap-4 mb-4 mx-2 centrar sinlimites" >
                                   <Form.Label className="w-25 sinlimites mx-2">Fecha</Form.Label>
-                                  <Form.Control className="borde-rad w-75 sinlimites mx-2" id="fFecha"type="date" placeholder="Fecha" />
+                                  <Form.Control className="borde-rad w-75 sinlimites mx-2" id="fFecha"type="date" onChange={handleInput4} value={fecha}/>
                               </Form.Group>
                               
                               <Form.Group className="d-inline-flex gap-4 mb-3 mx-2 centrar sinlimites" >
                                   <Form.Label className="w-50 sinlimites mx-2">Numero Factura</Form.Label>
-                                  <Form.Control className="borde-rad w-50 sinlimites mx-2" id="nFactura"type="number" placeholder="Factura" disabled="true" value={nFactura}/>
+                                  <Form.Control className="borde-rad w-50 sinlimites mx-2" id="nFactura"type="number"  disabled="true" onChange={handleInput5} value={nFactura}/>
                               </Form.Group>
                               
                           </div>
@@ -412,7 +377,7 @@ function NuevaVenta1() {
         <tbody id="FtBody">
         {
               listaTarea.map((task,index) => (
-                <tr>
+                <tr key={nanoid()}>
                   <td>
                     {index+1}
                   </td>
@@ -466,17 +431,17 @@ function NuevaVenta1() {
             <div>
             <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
                 <Form.Label>Total</Form.Label>
-                <Form.Control className="borde-rad w-50" id="fTotal"type="number" placeholder="Total" disabled="true"/>
+                <Form.Control className="borde-rad w-50" id="fTotal"type="number" disabled value={total}/>
             </Form.Group>
             </div>
             <div>
             <Form.Group className="d-inline-flex w-20 mb-3 gap-3 centrar" >
                 <Form.Label>Vendedor</Form.Label>
-                <Form.Control className="borde-rad" id="fVendedor" type="text" placeholder="Vendedor" disabled="true" value={vendedor}/>
+                <Form.Control className="borde-rad" id="fVendedor" type="text"  disabled value={vendedor}/>
             </Form.Group>{" "}
             <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
                 <Form.Label className="mx-2">Descripcion</Form.Label>
-                <Form.Control className="borde-rad" id="fDescrip" type="text" placeholder="Descripcion" />
+                <Form.Control className="borde-rad" id="fDescrip" type="text" onChange={handleInput5} value={descripcion}/>
             </Form.Group>
             </div>
             <br />
@@ -484,7 +449,7 @@ function NuevaVenta1() {
 
             
 
-            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={handleShow}>Generar Factura</Button>{' '}
+            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>  GuardarFactura()} >Generar Factura</Button>{' '}
             
             
             
@@ -498,7 +463,9 @@ function NuevaVenta1() {
                 </Modal.Header>
                 <Modal.Body>Factura Exitosa</Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" href="/EstadoVentas" onClick={handleClose}>
+                <Button variant="primary" href="/EstadoVentas" 
+                
+                onClick={handleClose}>
                     Cerrar
                 </Button>
                 </Modal.Footer>
@@ -520,13 +487,13 @@ function NuevaVenta1() {
             <div>
               <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
                 <Form.Label>Cedula</Form.Label>
-                <Form.Control className="borde-rad" id="fCcedula"type="number" placeholder="Cedula"/>
+                <Form.Control className="borde-rad" id="fCcedula"type="number" onChange={handleInput6} value={cedula}/>
               </Form.Group>
             </div>
             <div>
               <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
                 <Form.Label>Nombre</Form.Label>
-                <Form.Control className="borde-rad" id="fCnombre"type="text" placeholder="Nombre" />
+                <Form.Control className="borde-rad" id="fCnombre"type="text"  onChange={handleInput7} value={nombre}/>
               </Form.Group>
             </div>
           </div>
@@ -543,10 +510,10 @@ function NuevaVenta1() {
         <form className="d-block w-100 mb-3 gap-3 centrar" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
           <div className="d-inline-flex w-100 mb-3 gap-2 centrar" > 
             <label className="mx-2" >Codigo</label>
-            <input className="borde-rad w-25 mx-3" id="fCodigo"type="number" placeholder="Codigo" onChange={handleInput1} value={codigo}/>
+            <input className="borde-rad w-25 mx-3" id="fCodigo"type="number"  onChange={handleInput1} value={codigo}/>
             <button
               className="btn btn-primary w-25 btn-sm mx-3"
-              onClick={() => listarServicios()}
+              onClick={() => buscarServicio()}
               
               >
 
@@ -556,13 +523,13 @@ function NuevaVenta1() {
           </div>
           <div className="d-inline-flex w-100 mb-3 gap-2 centrar">
             <label>Servicio</label>
-            <input className="borde-rad w-25" id="fServiciox"type="text" placeholder="Servicio"  onChange={handleInput} value={tarea}/>
+            <input className="borde-rad w-25" id="fServiciox"type="text"   onChange={handleInput} disabled value={tarea}/>
             <label>Cantidad</label>
-            <input className="borde-rad w-25" id="fCantidad"type="number" placeholder="Cantidad" onChange={handleInput2} value={cantidad} />
+            <input className="borde-rad w-25" id="fCantidad"type="number"  onChange={handleInput2} value={cantidad} />
           </div>
           <div className="d-inline-flex w-100 mb-3 gap-2 centrar" >
             <label>Precio</label>
-            <input className="borde-rad w-25" id="fPreciox"type="number" placeholder="Precio" onChange={handleInput3} value={precio}/>
+            <input className="borde-rad w-25" id="fPreciox"type="number"  onChange={handleInput3} disabled value={precio}/>
           </div>
           <div className="d-inline-flex w-100 mb-3 gap-2 centrar" >
 
@@ -571,6 +538,7 @@ function NuevaVenta1() {
                 (
                   <button
                     className="btn btn-outline-primary"
+                    onClick={notify}
                   >Actualizar</button>
                 )
                 :
