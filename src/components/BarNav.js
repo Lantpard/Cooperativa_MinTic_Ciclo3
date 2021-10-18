@@ -24,17 +24,17 @@ function BarNav() {
         >Nueva Venta</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link className="linkColor gap-5 mx-2" href="/EstadoVentas">Estado Ventas</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/EstadoVentas1">Estado Ventas</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link className="linkColor gap-5 mx-2" href="/NuevoServicio">Nuevo Servicio</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/NuevoServicio1">Nuevo Servicio</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link className="linkColor gap-5 mx-2" href="/Servicios" 
+        <Nav.Link className="linkColor gap-5 mx-2" href="/Servicios1" 
         >Servicios</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link className="linkColor gap-5 mx-2" href="/Roles">Roles</Nav.Link>
+        <Nav.Link className="linkColor gap-5 mx-2" href="/Roles1">Roles</Nav.Link>
       </Nav.Item>
       <Nav.Item >
           <Dropdown>

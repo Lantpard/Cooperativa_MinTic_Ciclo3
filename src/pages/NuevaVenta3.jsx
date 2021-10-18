@@ -2,13 +2,16 @@ import React, { useEffect, useState, useRef }  from "react"
 import { nanoid } from 'nanoid';
 import {Card,CardGroup,Button,Image,Modal,Form,Table} from "react-bootstrap"
 
-import {database} from 'firebase'
+
 import Logot3 from 'media/isotop.png';
 import { getAuth } from "firebase/auth";
+
+import {database,consultarDatabase,guardarDatabase} from 'firebase'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
+import { Loading } from 'components/Loading'
 
 export let leo="hola";
 /* export {handleFormulario,editar,handleGuardarEditar, handleDeshacer}; */
@@ -24,7 +27,7 @@ var uEmail=""
 function NuevaVenta1() {
 
      //nueva tarea
-     const [tarea, setTarea] = useState('')
+     const [servicio, setServicio] = useState('')
      const [codigo, setCodigo] = useState('')
      const [cantidad, setCantidad] = useState('')
      const [precio, setPrecio] = useState('')
@@ -35,14 +38,17 @@ function NuevaVenta1() {
      const [cedula, setCedula] = useState('')
      const [descripcion, setDescripcion] = useState('')
      const [fecha, setFecha] = useState('')
+     const [loading, setLoading] = useState(false)
 
      const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
      const [servicios, setServicios] = useState([]);
-
+     const [facturas, setFacturas] = useState([]);
+     const [clientes, setClientes] = useState([]);
 
     const [listaTarea, setListaTarea] = useState([])
     const [FacturaLista, setFacturaLista] = useState([]);
     const [rege, setRege] = useState([])
+    
     
    
  
@@ -52,14 +58,68 @@ function NuevaVenta1() {
       const [id, setId] = useState('')
       
 
-      const [show, setShow] = useState(false);
+      const [show, setShow] = React.useState(false);
+    const [show1, setShow1] = React.useState(false);
+    const [show2, setShow2] = React.useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => 
+  {
+    handleClose()
+  GuardarFactura()
+  setShow1(true)
+  
+  }
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
+
+
+
+//////////////////
+
+//descargar info
+useEffect(() => {
+  setLoading(true)
+  cargarDatos()
+}, [Loading])
+
+const cargarDatos = async () => {
+  // console.log('Entro..!');
+  const listaTemporal1 = await consultarDatabase('Facturas')
+  // console.log(listaTemporal);
+  setFacturas(listaTemporal1)
+
+  const listaTemporal2 = await consultarDatabase('Servicios')
+  // console.log(listaTemporal);
+  setServicios(listaTemporal2)
+
+  const listaTemporal3 = await consultarDatabase('Clientes')
+  // console.log(listaTemporal);
+  setClientes(listaTemporal3)
+
+  const auth = await getAuth();
+  const user = auth.currentUser;
+  uNombre=user.displayName
+  uEmail=user.email
+  console.log(uNombre)
+
+  setVendedor(uNombre) 
+  setNfactura((listaTemporal1.length)+1)
+  setLoading(false)
+
+}
+
+
+
+
 
 ///////////////
-      useEffect(() => {
+      /* useEffect(() => {
         
         if (ejecutarConsulta) {
           
@@ -69,11 +129,14 @@ function NuevaVenta1() {
 
           setEjecutarConsulta(false);
         }
-      }, [ejecutarConsulta]);
+        
+        console.log(listaser)
+
+      }, [ejecutarConsulta]); */
 ////////////
 
     
-    async function listarServicios(){
+   /*  async function listarServicios(){
         
         listaser= await leerServicios();
         
@@ -89,9 +152,9 @@ function NuevaVenta1() {
 
                 for(var i=0;i<listaser.length;++i){
                   
-                  if(listaser[i].Codigo===Number(codigo)){
-                    setTarea(listaser[i].Servicio)
-                    setPrecio(listaser[i].Precio)
+                  if(listaser[i].codigo===Number(codigo)){
+                    setTarea(listaser[i].servicio)
+                    setPrecio(listaser[i].precio)
                     break;
                   }else{
                     setTarea("")
@@ -113,18 +176,19 @@ function NuevaVenta1() {
             
         })
         setServicios(servicex)
+        console.log(servicex);
         return servicex
         
 
         
     }
-    
+     */
 
 
     const handleInput = (e) => {
         // console.log(e.target.value);
         // Asignacion al tarea
-        setTarea(e.target.value)
+        setServicio(e.target.value)
         //setCodigo(e.target.value)
     }
     const handleInput1 = (e) => {
@@ -173,20 +237,47 @@ const handleInput7 = (e) => {
         e.preventDefault()
 
     // Validacion que el campo no esta vacio
-    if (!codigo.trim() || !cantidad.trim() || !tarea.trim()) {
+    if (!codigo.trim() || !cantidad.trim() || !servicio.trim()) {
       
       return
     }
 
-    
-    setListaTarea([
+    const arregloTemporal5 =([
       ...listaTarea,
       {
-        id: nanoid(),
+        id:nanoid(),
         // tarea: 'valor.... la variable'
         // tarea: tarea
         codigo,
-        tarea,
+        servicio,
+        cantidad,
+        precio,
+      }
+    ])
+    console.log("arreglo temporal5",arregloTemporal5)
+    let suma=0
+  
+        for(var i=0;i<arregloTemporal5.length;++i){
+          suma+=( Number(arregloTemporal5[i].cantidad)*arregloTemporal5[i].precio)
+        }
+          
+        setTotal(suma)
+    
+
+
+
+    
+
+    
+
+    setListaTarea([
+      ...listaTarea,
+      {
+        id:nanoid(),
+        // tarea: 'valor.... la variable'
+        // tarea: tarea
+        codigo,
+        servicio,
         cantidad,
         precio,
       }
@@ -197,7 +288,7 @@ const handleInput7 = (e) => {
 
     // Limpiar el estado
     setCodigo('')
-    setTarea('')
+    setServicio('')
     setCantidad('')
     setPrecio('')
 
@@ -216,7 +307,7 @@ const handleInput7 = (e) => {
 
   const handleEditar = (task) => {
     
-    setTarea(task.tarea)
+    setServicio(task.servicio)
     setCodigo(task.codigo)
     setCantidad(task.cantidad)
     setEditar(true)
@@ -228,19 +319,31 @@ const handleInput7 = (e) => {
   const handleGuardarEditar = (e) => {
     e.preventDefault()
     
-    if (!codigo.trim() || !tarea.trim() || !cantidad.trim() ) {
+    if (!codigo.trim() || !servicio.trim() || !cantidad.trim() ) {
       
       return
     }
 
     const arregloTemporal = listaTarea.map((item) => {
-      return item.id === id ? { id: id, codigo:codigo,tarea: tarea,precio:precio,cantidad:cantidad } : item
+      return item.id === id ? { id: id, codigo:codigo,servicio: servicio,precio:precio,cantidad:cantidad } : item
     })
     
     setListaTarea(arregloTemporal)
 
+    //// suma
+    let suma=0
+  
+    for(var i=0;i<arregloTemporal.length;++i){
+      suma+=( Number(arregloTemporal[i].cantidad)*arregloTemporal[i].precio)
+    }
+      
+    setTotal(suma)
+
+    ///
+
+    console.log("arreglo temporal editar",arregloTemporal)
     // Limpiar el estado
-    setTarea('')
+    setServicio('')
     setCodigo('')
     setCantidad('')
     setPrecio('')
@@ -251,9 +354,9 @@ const handleInput7 = (e) => {
 
     const notify = () => {
     
-      SumarProductos()
+      
     
-    if(tarea==""){
+    if(servicio==""){
       toast.error("Cogido no valido");
     }else{
     toast.success("Servicio Agregado")
@@ -263,43 +366,80 @@ const handleInput7 = (e) => {
     }
     
 
-    const SumarProductos = ()=>{
-      console.log("primera: ",listaTarea)
-    let suma=0
-      /* setRege(listaTarea)
-        rege.map((task) => (
-  
-         suma=suma+( task.cantidad*task.precio)
-  
-        )) */
+    
 
-        for(var i=0;i<listaTarea.length;++i){
-          suma+=( listaTarea[i].cantidad*listaTarea[i].precio)
+
+    const AgregarCliente =()=>{
+
+      const arregloTemporal2 =([{
+        
+        cedula:Number(cedula),
+        nombre
+      }
+      ])
+
+      for(var i=0;i<clientes.length;++i){
+                  
+        if(clientes[i].cedula!==Number(cedula)){
+          arregloTemporal2.forEach((cliente) => guardarDatabase('Clientes', cliente))
+          break;
         }
-          console.log("segunda",listaTarea)
-        setTotal(suma)
     }
+  }
 
+    const  GuardarFactura= async()=>{
+      
+      setLoading(true)
 
-    const  GuardarFactura= ()=>{
+      
+        
+        console.log("primera antes de guardar",listaTarea);
 
-      console.log("primera",listaTarea);
+      const arregloTemporal5 =([
+        
+        {
+          
+          // tarea: 'valor.... la variable'
+          // tarea: tarea
+          id_cliente:cedula,
+          factura:nFactura,
+          descripcion,
+          fecha,
+          nombre,
+          total,
+          estado:"En proceso",
+          vendedor,
+          servicios:listaTarea
+          
+        }
+      ])
 
       setFacturaLista([
         
         {
-          id: nanoid(),
+          
           // tarea: 'valor.... la variable'
           // tarea: tarea
-          cedula,
-          nFactura,
+          id_cliente:cedula,
+          factura:nFactura,
           descripcion,
           fecha,
-          listaTarea
+          listaTarea,
+          nombre,
+          vendedor
         }
       ])
 
       console.log("segunda",FacturaLista);
+      console.log("final",arregloTemporal5);
+
+      arregloTemporal5.forEach((factura) => guardarDatabase('Facturas', factura))
+
+
+      AgregarCliente()
+
+      setLoading(false)
+      /* guardarDatabase(arregloTemporal5,"Facturas") */
 
         /* setCedula("")
         setNombre("")
@@ -309,6 +449,10 @@ const handleInput7 = (e) => {
         setTotal("")
         setVendedor("")
         handleShow() */
+        
+      
+
+      
 
     }
 
@@ -316,16 +460,35 @@ const handleInput7 = (e) => {
 
       for(var i=0;i<servicios.length;++i){
                   
-        if(servicios[i].Codigo===Number(codigo)){
-          setTarea(servicios[i].Servicio)
-          setPrecio(servicios[i].Precio)
+        if(servicios[i].codigo===Number(codigo)){
+          setServicio(servicios[i].servicio)
+          setPrecio(servicios[i].precio)
           break;
         }else{
-          setTarea("")
+          setServicio("")
           setPrecio("")
         }
       }
+
+     
     }
+
+    const buscarCliente=()=>{
+      
+      for(var i=0;i<clientes.length;++i){
+                  
+        if(clientes[i].cedula===Number(cedula)){
+          setNombre(clientes[i].nombre)
+          
+          break;
+        }else{
+          setNombre("")
+          
+      }
+
+     
+    }
+  }
 
 
     return (
@@ -337,6 +500,13 @@ const handleInput7 = (e) => {
                 <h1 className="fuente4">Nueva Venta</h1>
             </div>
             <br />
+
+            {
+        loading
+          ?
+          <Loading />
+          :
+          <>
             <div className="d-inline-flex w-100 mb-3 gap-3 fuente3">
                 <div className="w-100 " >
                 <CardGroup>
@@ -385,7 +555,7 @@ const handleInput7 = (e) => {
                     {task.codigo}
                   </td>
                   <td>
-                      {task.tarea}
+                      {task.servicio}
                   </td>
                   <td>
                       {task.precio}
@@ -449,7 +619,7 @@ const handleInput7 = (e) => {
 
             
 
-            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>  GuardarFactura()} >Generar Factura</Button>{' '}
+            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>   handleShow ()} >Generar Factura</Button>{' '}
             
             
             
@@ -457,15 +627,40 @@ const handleInput7 = (e) => {
             <Button className="mx-2 borde-rad" id="fCancelar"variant="danger">Cancelar</Button>{' '}
             </div>
 
-                    <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header>
+                <Modal.Title>Nueva Factura</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Deseas generar la Factura?</Modal.Body>
+                <Modal.Footer>
+                <Button variant="primary" onClick={handleShow1}>
+                    Si
+                </Button>
+                <Button variant="danger" onClick={handleShow2}>
+                    No
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show1} onHide={handleClose1}>
                 <Modal.Header>
                 <Modal.Title>Status</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Factura Exitosa</Modal.Body>
+                <Modal.Body>Nueva Factura Generada con exito</Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" href="/EstadoVentas" 
-                
-                onClick={handleClose}>
+                <Button variant="primary" href="/EstadoVentas1" onClick={handleClose1}>
+                    Cerrar
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show2} onHide={handleClose2}>
+                <Modal.Header>
+                <Modal.Title>Status</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Operacion Cancelada</Modal.Body>
+                <Modal.Footer>
+                <Button variant="primary" href="/NuevoServicio" onClick={handleClose2}>
                     Cerrar
                 </Button>
                 </Modal.Footer>
@@ -482,13 +677,22 @@ const handleInput7 = (e) => {
   <div className="d-block w-75 mb-3 gap-3">
     <CardGroup>
       <Card className=" cardColor w-100 text-white shablack">
-        <Form>
+        <>
           <div name="datos" className="d-block centrar w-100 p-3 gap-3 ">
             <div>
-              <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
-                <Form.Label>Cedula</Form.Label>
-                <Form.Control className="borde-rad" id="fCcedula"type="number" onChange={handleInput6} value={cedula}/>
-              </Form.Group>
+              <form className="d-inline-flex w-50 mb-3 gap-3 centrar" >
+                <label>Cedula</label>
+                <input className="borde-rad" id="fCcedula"type="number" onChange={handleInput6} value={cedula}/>
+              </form>
+              <button
+              className="btn btn-primary w-25 btn-sm mx-3"
+              onClick={() => buscarCliente()}
+              
+              >
+
+                
+              Buscar
+            </button>
             </div>
             <div>
               <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
@@ -497,7 +701,7 @@ const handleInput7 = (e) => {
               </Form.Group>
             </div>
           </div>
-        </Form>
+        </>
       </Card>
     </CardGroup>
     <br />
@@ -523,7 +727,7 @@ const handleInput7 = (e) => {
           </div>
           <div className="d-inline-flex w-100 mb-3 gap-2 centrar">
             <label>Servicio</label>
-            <input className="borde-rad w-25" id="fServiciox"type="text"   onChange={handleInput} disabled value={tarea}/>
+            <input className="borde-rad w-25" id="fServiciox"type="text"   onChange={handleInput} disabled value={servicio}/>
             <label>Cantidad</label>
             <input className="borde-rad w-25" id="fCantidad"type="number"  onChange={handleInput2} value={cantidad} />
           </div>
@@ -571,6 +775,11 @@ const handleInput7 = (e) => {
           
           
           />
+
+</>
+      }
+
+
 
         </div>
     );

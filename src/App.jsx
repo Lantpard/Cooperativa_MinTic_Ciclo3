@@ -4,11 +4,11 @@ import Index from "pages/Index";
 
 import NuevaVenta3 from "pages/NuevaVenta3";
 import Home from "pages/Home";
-import EstadoVentas from "pages/EstadoVentas";
-import ModificacionVenta from "pages/ModificacionVenta";
-import NuevoServicio from "pages/NuevoServicio";
-import Servicios from "pages/Servicios";
-import Roles from "pages/Roles";
+import EstadoVentas1 from "pages/EstadoVentas1";
+import ModificacionVenta1 from "pages/ModificacionVenta1";
+import NuevoServicio1 from "pages/NuevoServicio1";
+import Servicios1 from "pages/Servicios1";
+import Roles1 from "pages/Roles1";
 import Login from "pages/Login";
 import { AuthProvider } from "firebase"
 
@@ -38,7 +38,7 @@ function App() {
             <Switch>
 
               {/* Ruta Administrador */}
-              <Route path={['/Home', '/NuevaVenta3', '/EstadoVentas', '/ModificacionVenta', '/NuevoServicio', '/Roles', '/Servicios']}>
+              <Route path={['/Home', '/NuevaVenta3','/EstadoVentas1/:id', '/EstadoVentas1', '/ModificacionVenta1', '/NuevoServicio1', '/Roles1', '/Servicios1']}>
                 <PrivateLayout>
                   <Switch>
                     <Route path='/Home'>
@@ -49,24 +49,24 @@ function App() {
                       <NuevaVenta3 />
                     </Route>
 
-                    <Route path='/EstadoVentas'>
-                      <EstadoVentas />
+                    
+
+                    <Route exact path='/EstadoVentas1/:idServicio' component={ModificacionVenta1}/>
+                      
+                    <Route path='/EstadoVentas1'>
+                      <EstadoVentas1 />
                     </Route>
 
-                    <Route path='/ModificacionVenta'>
-                      <ModificacionVenta />
+                    <Route path='/NuevoServicio1'>
+                      <NuevoServicio1 />
                     </Route>
 
-                    <Route path='/NuevoServicio'>
-                      <NuevoServicio />
+                    <Route path='/Roles1'>
+                      <Roles1 />
                     </Route>
 
-                    <Route path='/Roles'>
-                      <Roles />
-                    </Route>
-
-                    <Route path='/Servicios'>
-                      <Servicios />
+                    <Route path='/Servicios1'>
+                      <Servicios1 />
                     </Route>
 
                     <Route path='*'>
@@ -109,7 +109,7 @@ function App() {
 {/* <Router>
             <Switch>
               
-              <Route path={['/Home', '/NuevaVenta3', '/EstadoVentas', '/ModificacionVenta']}>
+              <Route path={['/Home', '/NuevaVenta3', '/EstadoVentas1', '/ModificacionVenta']}>
                 <PrivateLayout2>
                   <Switch>
                     <Route path='/Home'>
@@ -120,8 +120,8 @@ function App() {
                       <NuevaVenta3 />
                     </Route>
 
-                    <Route path='/EstadoVentas'>
-                      <EstadoVentas />
+                    <Route path='/EstadoVentas1'>
+                      <EstadoVentas1 />
                     </Route>
 
                     <Route path='/ModificacionVenta'>
@@ -172,8 +172,8 @@ function App() {
               </Route>
 
             </Switch>
-</Router>
- */}
+</Router> */}
+
 
 
       {/* <Router>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container,Image } from "react-bootstrap";
+import { Spinner, Container,Image } from "react-bootstrap";
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import Logot3 from 'media/logot3.png';
 import { database } from "firebase";
@@ -40,6 +40,9 @@ function Home() {
     <div>
       
       <br />
+      {/* <Spinner animation="border" role="status" variant="primary" >
+        <span className="visually-hidden">Loading...</span>
+      </Spinner> */}
       <Container>
         <div
           className="d-block w-100 mb-3 gap-3 centrar text-center"
