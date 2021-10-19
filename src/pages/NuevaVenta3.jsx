@@ -8,6 +8,8 @@ import { getAuth } from "firebase/auth";
 
 import {database,consultarDatabase,guardarDatabase} from 'firebase'
 
+import swal from 'sweetalert'
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
@@ -366,7 +368,73 @@ const handleInput7 = (e) => {
     }
     
 
+    const notifyCerrar = () => {
     
+  
+   
+      swal({
+        title: "Esta Seguro de Cancelar la Operación?",
+        text: "Si Cancelas no se generara la factura!",
+        icon: "warning",
+        buttons: ["Si", "No"],
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Seguir facturando!",{icon: "info",});
+        } else {
+          
+  
+          swal("Operacion Cancelada!", {
+            icon: "error",
+          });
+          
+          setTimeout(function (){window.location.href="/EstadoVentas1"},2000)
+          
+        }
+      });
+  
+      
+      
+          
+      }
+  
+  
+  
+      const notifyGuardar = () => {
+      
+    
+     
+        swal({
+          title: "Deseas Generar la Factura?",
+          text: "Se Generara la facturación de los servicios!",
+          icon: "warning",
+          buttons: ["Si", "No"],
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Operacion Cancelada!",{icon: "error"});
+          } else {
+            
+  
+            swal("Factura Generada!", {
+              icon: "success",
+            });
+  
+            GuardarFactura()
+            setTimeout(function (){window.location.href="/EstadoVentas1"},3000)
+            
+          }
+        });
+    
+        
+        
+            
+        }
+
+
+
 
 
     const AgregarCliente =()=>{
@@ -619,12 +687,12 @@ const handleInput7 = (e) => {
 
             
 
-            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>   handleShow ()} >Generar Factura</Button>{' '}
+            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>   notifyGuardar ()} >Generar Factura</Button>{' '}
             
             
             
             
-            <Button className="mx-2 borde-rad" id="fCancelar"variant="danger">Cancelar</Button>{' '}
+            <Button className="mx-2 borde-rad" id="fCancelar"variant="danger" onClick={() =>   notifyCerrar ()}>Cancelar</Button>{' '}
             </div>
 
             <Modal show={show} onHide={handleClose}>

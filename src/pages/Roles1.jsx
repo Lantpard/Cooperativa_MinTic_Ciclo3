@@ -153,7 +153,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(roles);
         {
               vehiculosFiltrados.map((task,index) => 
               (
-                <FilaRol task={task} index={index}/>
+                <FilaRol task={task} index={index} setEjecutarConsulta={setEjecutarConsulta}/>
               )
               
               
@@ -210,7 +210,7 @@ const FilaRol=({setEjecutarConsulta,task,index})=>{
   const [edit,setEdit]=useState(false)
 
   const [editRol, setEditRol] = useState({
-    id:task.id,
+    
     id_vendedor: task.id_vendedor,
     email: task.email,
     nombre: task.nombre,
@@ -218,10 +218,10 @@ const FilaRol=({setEjecutarConsulta,task,index})=>{
     estado: task.estado
   });
 
-  const ActualizarRol = /* async */() => {
+  const ActualizarRol = async() => {
     
 
-    /* await actualizarDocumentoDatabase ("Roles",task.id,editRol); */
+    await actualizarDocumentoDatabase ("Roles",task.id,editRol);
     
     
     setEdit(false);

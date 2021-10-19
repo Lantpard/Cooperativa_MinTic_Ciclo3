@@ -1,27 +1,19 @@
 import React, { useEffect, useState, useRef }  from "react"
 import {Container,Button,Card,CardGroup,Image,Table,Form,Modal} from "react-bootstrap"
-/* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
-import BarNav from "components/BarNav";
-import Client from "components/Cliente";
-import Service from "components/Servicio";
-import TablaFac from "components/TablaFac";
-import FooterFact from "components/FooterFact";
-import HeaderFact from "components/HeaderFact";
-import HeaderEstadoV from "components/HeaderEstadoV";
-import TablaEstaV from "components/TablaEstaV";
-import HeaderNs from "components/HeaderNs";
-import TablaNs from "components/TablaNs";
-import HeaderSer from "components/HeaderSer";
-import HeaderRol from "components/HeaderRol";
-import TablaRol from "components/TablaRol";
+
 import Logot3 from 'media/isotop.png';
 
-import {database,consultarDatabase} from 'firebase'
+import swal from 'sweetalert'
+
+import {database,consultarDatabase,guardarDatabase} from 'firebase'
+
 import { ToastContainer, toast } from 'react-toastify';
 
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
+
+
 
 function NuevoServicio1() {
 
@@ -30,28 +22,8 @@ function NuevoServicio1() {
     const [estado, setEstado] = useState('')
     const [precio, setPrecio] = useState('')
     const [servicio, setServicio] = useState('')
-    const [tarea, setTarea] = useState('')
     
     
-    
-    const [total, setTotal] = useState('')
-    const [vendedor, setVendedor] = useState('')
-    const [nFactura, setNfactura] = useState('')
-    const [nombre, setNombre] = useState('')
-    const [cedula, setCedula] = useState('')
-    const [descripcion, setDescripcion] = useState('')
-    const [fecha, setFecha] = useState('')
-
-
-    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-    const [servicios, setServicios] = useState([]);
-    const [facturas, setFacturas] = useState([]);
-    const [clientes, setClientes] = useState([]);
-
-    
-    const [FacturaLista, setFacturaLista] = useState([]);
-    const [rege, setRege] = useState([])
-
     const [listaTarea, setListaTarea] = useState([])
 
     
@@ -62,24 +34,8 @@ function NuevoServicio1() {
     const [id, setId] = useState('')
     
 
-    const [show, setShow] = React.useState(false);
-    const [show1, setShow1] = React.useState(false);
-    const [show2, setShow2] = React.useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleClose1 = () => setShow1(false);
-  const handleShow1 = () => setShow1(true);
-
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
-
-  
-
-
-
 const handleInput1 = (e) => {
+  e.preventDefault()
     // console.log(e.target.value);
     // Asignacion al tarea
     //setTarea(e.target.value)
@@ -87,6 +43,7 @@ const handleInput1 = (e) => {
 }
 
 const handleInput2 = (e) => {
+  e.preventDefault()
     // console.log(e.target.value);
     // Asignacion al tarea
     //setTarea(e.target.value)
@@ -94,37 +51,16 @@ const handleInput2 = (e) => {
 }
 
 const handleInput3 = (e) => {
+  e.preventDefault()
   
   setCantidad(e.target.value)
 }
 
 const handleInput4 = (e) => {
+  e.preventDefault()
   
 setPrecio(e.target.value)
 }
-
-/* const handleInput5 = (e) => {
-  
-setEstado(e.target.innertext)
-} */
-
-
-
-    //////////////////
-
-/* //descargar info
-useEffect(() => {
-    cargarDatos()
-  }, [])
-  
-  const cargarDatos = async () => {
-    // console.log('Entro..!');
-    const listaTemporal1 = await consultarDatabase('Servicios')
-    // console.log(listaTemporal);
-    setServicios(listaTemporal1)
-  
-  
-  } */
 
   const handleFormulario = (e) => {
     e.preventDefault()
@@ -138,7 +74,7 @@ if (!codigo.trim() || !cantidad.trim() || !servicio.trim()) {
 const arregloTemporal5 =([
   ...listaTarea,
   {
-    
+    id:nanoid(),
     // tarea: 'valor.... la variable'
     // tarea: tarea
     codigo,
@@ -148,13 +84,13 @@ const arregloTemporal5 =([
     estado
   }
 ])
-console.log("arreglo temporal",arregloTemporal5)
+
 
 
 setListaTarea([
   ...listaTarea,
   {
-    
+    id:nanoid(),
     // tarea: 'valor.... la variable'
     // tarea: tarea
     codigo,
@@ -164,9 +100,6 @@ setListaTarea([
     estado
   }
 ])
-
- 
-
 
 // Limpiar el estado
 setCodigo('')
@@ -222,7 +155,6 @@ setPrecio('')
 setEstado('')
 setEditar(false)
 
-
 }
 
 
@@ -238,29 +170,34 @@ toast.success("Servicio Agregado")
 }
 
 
+const  GuardarFactura1= async()=>{
+ 
+  const arregloTemporal5 =([
+    
+    
+      
+      // tarea: 'valor.... la variable'
+      // tarea: tarea
+    ...listaTarea
+      
+    
+  ])
 
-
-
-const  GuardarFactura= ()=>{
-
-  console.log("primera",listaTarea);
-
-  setFacturaLista([
+  /* setListaTarea([
     
     {
       
       // tarea: 'valor.... la variable'
       // tarea: tarea
-      cedula,
-      nFactura,
-      descripcion,
-      fecha,
-      listaTarea,
-      nombre
+      ...listaTarea
     }
-  ])
+  ]) */
 
-  console.log("segunda",FacturaLista);
+  arregloTemporal5.forEach((servicio) => console.log(servicio))
+  
+  /* arregloTemporal5.forEach((servicio) => guardarDatabase('Servicios', servicio)) */
+  
+  /* guardarDatabase(arregloTemporal5,"Facturas") */
 
     /* setCedula("")
     setNombre("")
@@ -270,45 +207,37 @@ const  GuardarFactura= ()=>{
     setTotal("")
     setVendedor("")
     handleShow() */
-
 }
 
-const buscarServicio=()=>{
 
-  for(var i=0;i<servicios.length;++i){
-              
-    if(servicios[i].codigo===Number(codigo)){
-      setTarea(servicios[i].servicio)
-      setPrecio(servicios[i].precio)
-      break;
-    }else{
-      setTarea("")
-      setPrecio("")
+/* const notifyGuardar1 = () => {
+      
+    
+     
+  swal({
+    title: "Deseas Sincronizar los Servicios?",
+    text: "Se Agregaran los servicios a la base de servicios!",
+    icon: "warning",
+    buttons: ["Si", "No"],
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      swal("Operacion Cancelada!",{icon: "error"});
+    } else {
+      
+
+      swal("Servicios Agregados!", {
+        icon: "success",
+      });
+
+      GuardarFactura()
+      setTimeout(function (){window.location.href="/Servicios1"},3000)
+      
     }
-  }
+  });
 
- 
-}
-
-const buscarCliente=()=>{
-  
-  for(var i=0;i<clientes.length;++i){
-              
-    if(clientes[i].cedula===Number(cedula)){
-      setNombre(clientes[i].nombre)
-      
-      break;
-    }else{
-      setNombre("")
-      
-  }
-
- 
-}
-}
-
-
-
+  } */
 
     return (
         <div>
@@ -360,66 +289,42 @@ const buscarCliente=()=>{
                     {
               editar ?
                 (
+                  
                   <button
                     className="btn btn-outline-primary"
                     onClick={notify}
                   >Actualizar</button>
+
+                  
                 )
                 :
                 (
+                  <>
                   <button
                   className="btn btn-success borde-rad" id="fAgregar" 
                   onClick={notify}
                   
 
                   >Agregar</button>
+
+                <button 
+                    className="btn btn-primary"
+                    onClick={GuardarFactura1()}
+                  >Sincronizar Servidor</button>
+
+                  </>
                 )
             }
+
+                
                     </div>
                 </form>
+                
 
             </div>
         
 
-        <Modal show={show} onHide={handleClose}>
-                <Modal.Header>
-                <Modal.Title>Nuevo Servicio</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Deseas agregar el nuevo servicio?</Modal.Body>
-                <Modal.Footer>
-                <Button variant="primary" onClick={handleShow1}>
-                    Si
-                </Button>
-                <Button variant="danger" onClick={handleShow2}>
-                    No
-                </Button>
-                </Modal.Footer>
-            </Modal>
-
-            <Modal show={show1} onHide={handleClose1}>
-                <Modal.Header>
-                <Modal.Title>Status</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Nuevo Servicio Agregado con Exito</Modal.Body>
-                <Modal.Footer>
-                <Button variant="primary" href="/NuevoServicio" onClick={handleClose1}>
-                    Cerrar
-                </Button>
-                </Modal.Footer>
-            </Modal>
-
-            <Modal show={show2} onHide={handleClose2}>
-                <Modal.Header>
-                <Modal.Title>Status</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Operacion Cancelada</Modal.Body>
-                <Modal.Footer>
-                <Button variant="primary" href="/NuevoServicio" onClick={handleClose2}>
-                    Cerrar
-                </Button>
-                </Modal.Footer>
-            </Modal>
-
+        
                 </Card>
                 </CardGroup>
             </div>

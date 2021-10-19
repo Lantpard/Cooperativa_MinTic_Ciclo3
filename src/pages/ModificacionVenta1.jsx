@@ -5,6 +5,8 @@ import { nanoid } from 'nanoid';
 import {Card,CardGroup,Image, Modal,Button,Form,Table}    from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 
+import swal from 'sweetalert'
+
 import Service from "components/Servicio";
 import TablaFac from "components/TablaFac";
 import FooterEfact from "components/FooterEfact";
@@ -240,7 +242,7 @@ setNombre(e.target.value)
 const  GuardarFactura= async()=>{
  
 
-    setLoading(true)
+    
 
     
       
@@ -300,7 +302,7 @@ const  GuardarFactura= async()=>{
 
     /* AgregarCliente() */
 
-    setLoading(false)
+   
     /* guardarDatabase(arregloTemporal5,"Facturas") */
 
       /* setCedula("")
@@ -331,6 +333,72 @@ const  GuardarFactura= async()=>{
 
       
   }
+
+  const notifyCerrar = () => {
+    
+  
+   
+    swal({
+      title: "Esta Seguro de Cancelar la Operación?",
+      text: "Si Cancelas no se realizara la modificación a la factura!",
+      icon: "warning",
+      buttons: ["Si", "No"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Seguir Modificando!",{icon: "info",});
+      } else {
+        
+
+        swal("Operacion Cancelada!", {
+          icon: "error",
+        });
+        
+        setTimeout(function (){window.location.href="/EstadoVentas1"},2000)
+        
+      }
+    });
+
+    
+    
+        
+    }
+
+
+
+    const notifyGuardar = () => {
+    
+  
+   
+      swal({
+        title: "Deseas Actualizar la Factura?",
+        text: "Se Actualizara la factura de los servicios!",
+        icon: "warning",
+        buttons: ["Si", "No"],
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Operacion Cancelada!",{icon: "error"});
+        } else {
+          
+
+          swal("Factura Actualizada!", {
+            icon: "success",
+          });
+
+          GuardarFactura()
+          setTimeout(function (){window.location.href="/EstadoVentas1"},3000)
+          
+        }
+      });
+  
+      
+      
+          
+      }
+
 
 
   const AgregarCliente =()=>{
@@ -598,12 +666,16 @@ setPrecio('')
 
             
 
-            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>   handleShow ()} >Actualizar Factura</Button>{' '}
+            <Button className="mx-2 borde-rad " id="fGenerar" variant="success" onClick={() =>   notifyGuardar ()} >Actualizar Factura</Button>{' '}
             
             
             
             
-            <Button className="mx-2 borde-rad" id="fCancelar"variant="danger">Cancelar</Button>{' '}
+            <Button className="mx-2 borde-rad" id="fCancelar"variant="danger"  
+            onClick={() =>   notifyCerrar ()}
+            
+            
+            >Cancelar</Button>{' '}
             </div>
 
             </div>
