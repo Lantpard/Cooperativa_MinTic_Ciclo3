@@ -409,7 +409,7 @@ const handleInput7 = (e) => {
           total,
           estado:"En proceso",
           vendedor,
-          servicios:listaTarea
+          servicios:[...listaTarea]
           
         }
       ])

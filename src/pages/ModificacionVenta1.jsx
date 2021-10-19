@@ -46,7 +46,7 @@ function ModificacionVenta1() {
     const [descripcion, setDescripcion] = useState('')
     const [fecha, setFecha] = useState('')
     const [loading, setLoading] = useState(false)
-    const [estado, setEstado] = useState(false)
+    const [estado, setEstado] = useState()
     const [index1, setIndex1] = useState('')
 
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
@@ -143,7 +143,7 @@ function ModificacionVenta1() {
     
     
 
-    console.log("la lista es:",productoTemp.precio,productoTemp.estado,productoTemp.fecha,productoTemp.factura,productoTemp.descripcion,productoTemp.id_cliente,productoTemp.nombre,productoTemp.vendedor,productoTemp.servicios,productoTemp.servicios[0].id);
+    console.log("la lista es:",productoTemp.total,productoTemp.estado,productoTemp.fecha,productoTemp.factura,productoTemp.descripcion,productoTemp.id_cliente,productoTemp.nombre,productoTemp.vendedor,productoTemp.servicios,productoTemp.servicios[0].id);
 
 
     setLoading(false)
@@ -187,7 +187,7 @@ function ModificacionVenta1() {
     setEditar(true)
     setId(task.id)
     setPrecio(task.precio)
-    setEstado(task.estado)
+    
     
   }
   
@@ -249,7 +249,7 @@ const  GuardarFactura= async()=>{
     const arregloTemporal5 =
       
       {
-        idServicio,
+        
         // tarea: 'valor.... la variable'
         // tarea: tarea
         id_cliente:cedula,
@@ -260,7 +260,7 @@ const  GuardarFactura= async()=>{
         total,
         estado,
         vendedor,
-        servicios:listaTarea
+        servicios:[...listaTarea]
         
       }
     

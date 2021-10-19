@@ -8,9 +8,12 @@ import HeaderSer from "components/HeaderSer";
 import Logot3 from 'media/isotop.png';
 
 import Acciones2 from "components/Acciones2";
-import {database,consultarDatabase} from 'firebase'
+import {upDatabase,database,consultarDatabase,guardarDatabase,consultarDocumentoDatabase,actualizarDocumentoDatabase} from 'firebase'
+
 
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
+import { MdCancel } from 'react-icons/md'
+import { ImCheckboxChecked } from 'react-icons/im'
 import { nanoid } from 'nanoid';
 
 import { getAuth } from "firebase/auth";
@@ -144,34 +147,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
         {
               vehiculosFiltrados.map((task,index) => 
               (
-                <tr key={nanoid()}>
-                  <td>
-                    {index+1}
-                  </td>
-                  <td>
-                    {task.codigo}
-                  </td>
-                  <td>
-                    {task.servicio}
-                  </td>
-                  <td>
-                      {task.precio}
-                  </td>
-                  <td>
-                      {task.cantidad}
-                  </td>
-                  <td>
-                      {task.estado}
-                  </td>
-                  <td>
-                  <a href="#" className="mx-2">
-                  <BsPencilSquare className="colori"  onClick={() => handleEditar(task)}/>
-                  </a>
-                  <a href="#" >
-                  <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
-                  </a>
-                  </td>
-                </tr>
+                <FilaServicio task={task} index={index}/>
               )
               
               
@@ -194,5 +170,144 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
         </div>
     );
 }
+
+const FilaServicio=({task,index})=>{
+
+  const [servicios, setServicios] = useState([]);
+  const [loading, setLoading] = useState(false)
+
+  const handleEliminar = (id) => {
+    
+    // Filtrar los elementos que no tengan el id que recibimos por parametro o que sea diferente
+   /*  const arregloTemporal = listaTarea.filter((elemento) => {
+      return elemento.id !== id
+      // return !(elemento.id === id)
+    })
+    setListaTarea(arregloTemporal) */
+    
+  }
+
+  const handleEditar = (task) => {
+    
+    /* setTarea(task.tarea)
+    setCodigo(task.codigo)
+    setCantidad(task.cantidad)
+    setEditar(true)
+    setId(task.id)
+    setPrecio(task.precio) */
+    
+  }
+
+
+  useEffect(() => {
+    
+      cargarDatos()
+
+    }, [])
+
+    const cargarDatos = async () => {
+      // console.log('Entro..!');
+      const listaTemporal1 = await consultarDatabase('Servicios')
+      // console.log(listaTemporal);
+      setServicios(listaTemporal1)
+    
+      setLoading(false)
+    }
+
+  const [edit,setEdit]=useState(false)
+
+  const [editServicio, setEditServicio] = useState({
+    id: task.id,
+    codigo: task.codigo,
+    servicio: task.servicio,
+    precio: task.precio,
+    cantidad: task.cantidad,
+    estado: task.estado
+  });
+
+  const actualizarServicio = async () => {
+    setLoading(true)
+    await actualizarDocumentoDatabase ("Servicios",task.id,editServicio)
+    setEdit(false)
+    setLoading(false)
+  }
+
+  return(
+
+    <tr key={nanoid()}>
+
+                  <td>
+                    {index+1}
+                  </td>
+                  <td>
+                    {task.codigo}
+                  </td>
+                  <td>
+                    {task.servicio}
+                  </td>
+      {edit?
+      
+        <>
+            <td>
+            <input type="number" className="w-25" placeholder="precio" defaultValue={editServicio.precio}
+            onChange={(e) => setEditServicio({ ...editServicio, precio: e.target.value })}
+            
+            />
+            </td>
+            <td>
+            <input type="number" className="w-25" placeholder="cantidad" defaultValue={editServicio.cantidad}
+            onChange={(e) => setEditServicio({ ...editServicio, cantidad: e.target.value })}
+            />
+            </td>
+            <td>
+            <select className="w-50" aria-label="Default select example" defaultValue={editServicio.estado} 
+            onChange={(e) => setEditServicio({ ...editServicio, estado: e.target.value })}
+            
+            required>
+                        <option >Selecciona</option>
+                        <option value="Disponible">Disponible</option>
+                        <option value="No Disponible">No Disponible</option>
+                    </select>
+            </td>
+
+        </> 
+
+        :
+            <>
+                  
+                  <td>
+                      {task.precio}
+                  </td>
+                  <td>
+                      {task.cantidad}
+                  </td>
+                  <td>
+                      {task.estado}
+                  </td>
+             </>     
+    }
+                  
+                  
+                  <td>
+                  <a href="#" className="mx-2">
+                    {edit? <ImCheckboxChecked className="text-success"  onClick={() => actualizarServicio()}/> 
+                    :
+                    <BsPencilSquare className="text-primary"  onClick={() => setEdit(!edit)}/>}
+                  
+                  </a>
+                  <a href="#" >
+                    {edit? <MdCancel className="text-warning" onClick={() => handleEliminar(task.id)}/>
+                    :
+                    <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
+                    }
+                  
+                  </a>
+                  </td>
+                </tr>
+
+  )
+}
+
+
 
 export default Servicios1;
