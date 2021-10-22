@@ -1,42 +1,70 @@
-import React from "react";
+import React, { useEffect, useState, useRef }  from "react"
 import { Spinner, Container,Image } from "react-bootstrap";
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import Logot3 from 'media/logot3.png';
-import { database } from "firebase";
+import { database,guardarDatabase } from "firebase";
 import { getAuth } from "firebase/auth";
+import { Loading } from 'components/Loading'
+import { usuarioActual,ingreso } from "firebase";
+import { nanoid } from 'nanoid';
+
+/* import {getLogin} from 'pages/Login' */
 
 function Home() {
+
+
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    console.log("funcionando")
+    console.log("usuarioActual", usuarioActual)
+    setLoading(true)
+    
+    guardarDatos()
+
+  }, [])
+
   const guardarDatos = async () => {
-    const task = {
+    /* const task = {
         email:"lantpard@hotmail.com",
         usuario: "Leonardo"
 
     };
 
-    window.onload = async function(){
-      const auth = getAuth();
-      const user = auth.currentUser;
-  
-      console.log(user.displayName);
-      console.log(user.email);
+   
+    
 
-  }();
-
-
-    // Usando Firebase
-    // const respuesta = await firebase.firestore().collection("tareas").add(task);
-    // console.log(respuesta);
-
-    // Usando variables global declarada
+   
     const respuesta = await database.collection("ingreso").add(task);
-    console.log(respuesta);
+    console.log(respuesta) */;
 
-    // Usando Funcion implmentada
-    // const response = await guardarRegistro(task);
-    // console.log(response);
+    console.log("vammos a loading")
+    setTimeout(setLoading(false)/* function (){window.location.href="/EstadoVentas1"} */,5000)
+
+    setLoading(false)
+
+   
   };
 
+  window.onload = async function(){
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    /* console.log("usuario home",user) */
+    /* await guardarDatabase("Ingreso",ingreso) */
+    /* console.log(user.email);  */
+
+}();
+
   return (
+    <div>
+    {
+      loading
+        ?
+        <Loading />
+        :
+        <> 
+
     <div>
       
       <br />
@@ -54,6 +82,9 @@ function Home() {
           <br />
           <Image src={Logot3} rounded  height="200"/> 
           <br />
+
+          {/* <img src="https://lh3.googleusercontent.com/a-/AOh14Gj7sdOnld-J2sa9m9-UhTDoE40fDCuYgMpye8oP=s96-c" with="200">
+              </img> */}
           {/* <button  onClick={() => guardarDatos()}
           
           onClick={() => {console.log(Nombre)}} >Click</button> */}
@@ -64,6 +95,10 @@ function Home() {
         </div>
       </Container>
     </div>
+    
+    </>
+  }
+  </div>
   );
 }
 

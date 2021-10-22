@@ -174,43 +174,20 @@ const  GuardarFactura1= async()=>{
  
   const arregloTemporal5 =([
     
-    
-      
-      // tarea: 'valor.... la variable'
-      // tarea: tarea
-    ...listaTarea
-      
+    ...listaTarea,
     
   ])
 
-  /* setListaTarea([
-    
-    {
-      
-      // tarea: 'valor.... la variable'
-      // tarea: tarea
-      ...listaTarea
-    }
-  ]) */
-
-  arregloTemporal5.forEach((servicio) => console.log(servicio))
+  arregloTemporal5.forEach((item) => guardarDatabase('Servicios', {codigo:Number(item.codigo),
+    cantidad:Number(item.cantidad),
+    servicio:item.servicio,
+    precio:Number(item.precio),
+    estado:item.estado}))
   
-  /* arregloTemporal5.forEach((servicio) => guardarDatabase('Servicios', servicio)) */
-  
-  /* guardarDatabase(arregloTemporal5,"Facturas") */
-
-    /* setCedula("")
-    setNombre("")
-    setNfactura("")
-    setFecha("")
-    setDescripcion("")
-    setTotal("")
-    setVendedor("")
-    handleShow() */
 }
 
 
-/* const notifyGuardar1 = () => {
+const notifyGuardar1 = () => {
       
     
      
@@ -231,13 +208,13 @@ const  GuardarFactura1= async()=>{
         icon: "success",
       });
 
-      GuardarFactura()
+      GuardarFactura1()
       setTimeout(function (){window.location.href="/Servicios1"},3000)
       
     }
   });
 
-  } */
+  }
 
     return (
         <div>
@@ -251,66 +228,71 @@ const  GuardarFactura1= async()=>{
 
             <br />
 
-            <div className="d-block w-100 mb-3 gap-3 centrar ">
+            <div className="d-block mb-3 gap-3 centrar  ">
+              
             <CardGroup className="centrar fuente3">
-                <Card className=" cardColor w-100 text-white shablack">
-                
+              <br />
+                <Card className=" cardColor  text-white shablack ">
+                <br />
 
-            <div>
+            <div className="w-100 centrar mx-5">
                 
-                <form className="d-inline-flex w-100 mb-3 gap-3" controlId="formCodigo" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
+                <form className="d-block w-100 mb-3 gap-3 mx-3" controlId="formCodigo" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
                     
-                    <div>
-                    <label>Codigo</label>
-                    <input className="w-50" type="number" placeholder="Codigo" onChange={handleInput1} value={codigo}/>
+                    <div className="d-inline-flex w-75 mb-4 centrar gap-3 mx-2 my-2">
+                    <label className="w-25 mx-3" >Codigo</label>
+                    <input className="w-25" type="number" placeholder="Codigo" onChange={handleInput1} value={codigo}/>
                     
                 
-                    <label>Servicio</label>
-                    <input className="w-50" type="text" placeholder="Servicio" onChange={handleInput2} value={servicio}/>
+                    <label className="w-25">Servicio</label>
+                    <input className="w-25" type="text" placeholder="Servicio" onChange={handleInput2} value={servicio}/>
                     
 
-                    <label>Cantidad</label>
-                    <input className="w-50" type="number" placeholder="Cantidad" onChange={handleInput3} value={cantidad}/>
+                    <label className="w-25">Cantidad</label>
+                    <input className="w-25" type="number" placeholder="Cantidad" onChange={handleInput3} value={cantidad}/>
                     </div>
+                   
 
-                    <div>
-                    <label>Precio</label>
-                    <input className="w-50" type="number" placeholder="Precio" onChange={handleInput4} value={precio}/>
+                    <div className="d-inline-flex w-75 mb-4 centrar gap-3 mx-5 my-2">
+                    <label className="w-25 mx-3">Precio</label>
+                    <input className="w-25" type="number" placeholder="Precio" onChange={handleInput4} value={precio}/>
 
-                    <label >Estado</label>
-                    <select className="w-50" aria-label="Default select example" onChange={(e)=>setEstado(e.target.value)} value={estado} required>
+                    <label className="w-25">Estado</label>
+                    <select className="w-25" aria-label="Default select example" onChange={(e)=>setEstado(e.target.value)} value={estado} required>
                         <option >Selecciona</option>
                         <option value="Disponible">Disponible</option>
                         <option value="No Disponible">No disponible</option>
                     </select>
 
                     </div>
-                    <div>
+                    <div className="d-inline-flex w-100 mb-4 gap-3 centrar my-2">
                     {
               editar ?
                 (
                   
-                  <button
-                    className="btn btn-outline-primary"
+                  <Button
+                    className="btn btn-secondary" size="sm" type="submit"
                     onClick={notify}
-                  >Actualizar</button>
+                  >Actualizar</Button>
 
                   
                 )
                 :
                 (
                   <>
-                  <button
-                  className="btn btn-success borde-rad" id="fAgregar" 
+                  <Button
+                  className="btn btn-success borde-rad" size="sm" id="fAgregar" 
+                  type="submit"
                   onClick={notify}
                   
 
-                  >Agregar</button>
+                  >Agregar</Button>
 
-                <button 
+                <Button 
                     className="btn btn-primary"
-                    onClick={GuardarFactura1()}
-                  >Sincronizar Servidor</button>
+                    size="sm"
+                    onClick={()=>notifyGuardar1()}
+                  >Sincronizar Servidor</Button>
 
                   </>
                 )
@@ -329,12 +311,12 @@ const  GuardarFactura1= async()=>{
                 </CardGroup>
             </div>
 
-            <div className=" w-100 gap-3 centrar" >
+            <div className=" gap-3 cardColor centrar shablack " >
                 
                 <CardGroup>
                     <Card className=" cardColor w-100 text-white shablack centrar fuente3">
                     
-                    <Table striped bordered hover className="borde-rad">
+                    <Table striped bordered hover className=" w-100 borde-rad">
         <thead>
             <tr>
                 <th scope="col">#</th>

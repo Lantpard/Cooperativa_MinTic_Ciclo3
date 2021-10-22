@@ -12,6 +12,8 @@ function Acciones() {
     const [show1, setShow1] = React.useState(false);
     const [show2, setShow2] = React.useState(false);
 
+    
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 

@@ -737,8 +737,8 @@ setPrecio('')
                     <select className="w-50" aria-label="Default select example" onChange={(e)=>setEstado(e.target.value)} value={estado} required>
                         <option >Selecciona</option>
                         <option value="En proceso">En proceso</option>
-                        <option value="Cancelada">Cancelado</option>
-                        <option value="Cancelada">Entregado</option>
+                        <option value="Cancelada">Cancelada</option>
+                        <option value="Entregada">Entregada</option>
                     </select>
             
             

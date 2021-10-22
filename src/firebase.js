@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState, useEffect ,createContext} from "react"
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-
+import { nanoid } from 'nanoid';
 import { initializeApp } from 'firebase/app'
 // Referencia a la base de datos
 import { getFirestore } from 'firebase/firestore'
@@ -29,31 +29,53 @@ export default app;
 
 export const database = firebase.firestore();
 
-const AuthContext = React.createContext()
+const AuthContext = createContext()
+
+export let usuario;
 
 
-
-
-export function useAuth() {
+export const useAuth=()=> {
   return useContext(AuthContext)
 }
 
 
-export function AuthProvider({ children }) {
+export const AuthProvider=({ children })=> {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
+  const login=(email, password)=> {
+    return firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user);
+        return response.user;
+      });
   }
 
-  function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
-  }
 
-  function logout() {
-    return auth.signOut()
-  }
+  const signup = (email, password) => {
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user);
+        return response.user;
+      });
+  };
+
+  
+
+  const logout = () => {
+    return firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(false);
+      });
+  };
 
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email)
@@ -68,38 +90,39 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
-      setLoading(false)
-    })
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+      setIsAuthenticating(false);
+    });
 
     return unsubscribe
   }, [])
 
-  const value = {
-    currentUser,
+  const values = {
+    user,
+    isAuthenticating,
     login,
     signup,
     logout,
-    resetPassword,
-    updateEmail,
-    updatePassword
-  }
+    /* sendPasswordResetEmail, */
+    /* confirmPasswordReset, */
+  };
 
   
 
   return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
+    <AuthContext.Provider value={values}>
+      {!isAuthenticating && children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 
 
 const proveedor = new firebase.auth.GoogleAuthProvider();
 
-let usuarioActual;
+export let usuarioActual;
+export let ingreso;
 let listaTareas = [];
 
 // Variables DOM
@@ -109,11 +132,16 @@ const NavLogOut = document.getElementById("logout");
 export async function signGooglePop() {
   try {
     const respuesta = await auth.signInWithPopup(proveedor);
-    console.log(respuesta.user.displayName);
+    /* console.log(respuesta.user.displayName);
     console.log(respuesta.user.email);
-    console.log(respuesta.user.metadata);
+    console.log(respuesta.user.metadata); */
     usuarioActual = respuesta.user;
-    registro();
+    ingreso = {
+      email: usuarioActual.email,
+      user: usuarioActual.displayName,
+      fecha: Date.now()
+      
+    }
     window.location.href = "/Home";
     
 
@@ -123,25 +151,8 @@ export async function signGooglePop() {
   }
 }
 
-export async function registro() {
-  const ingreso = {
-    email: usuarioActual.email,
-    user: usuarioActual.displayName,
-  };
-  const respuesta = await guardarRegistro(ingreso);
-  console.log(respuesta);
-}
 
-// Base de datos
-export async function guardarRegistro(task) {
-  try {
-    const respuesta = await firebase.firestore().collection("task").add(task);
-    return respuesta;
-  } catch (error) {
-    console.error(error);
-    throw new Error(error);
-  }
-}
+
 
 
 // Consultar un documento
@@ -222,3 +233,29 @@ export const consultarDatabase = async (nombreColeccion) => {
     throw new Error(e)
   }
 }
+
+
+// LogOut -> salir
+export const logOutUsuario = async () => {
+  try {
+    const respuesta = await signOut(auth)
+    console.log(respuesta);
+    console.log('Me sali...!');
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+// Usuario Activo
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+    usuario = user
+    console.log('El usuario logueado');
+    console.log(usuario.displayName)
+  } else {
+    console.log('El usuario ya no esta logueado');
+    usuario = undefined
+  }
+
+})

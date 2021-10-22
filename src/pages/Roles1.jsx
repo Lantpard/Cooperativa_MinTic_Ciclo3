@@ -29,8 +29,7 @@ function Roles1() {
 //descargar info
 useEffect(() => {
   setLoading(true)
-    cargarDatos()
-
+  cargarDatos();
     if (ejecutarConsulta) {
       cargarDatos();
     }
@@ -105,6 +104,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(roles);
             <div className="d-block w-100 mb-3 gap-3">
             <CardGroup className="centrar fuente3">
                     <Card className=" cardColor w-100text-white shablack">
+                    <br />
                     <div className="d-inline-flex mb-3 centrar">
                     
                     <label className=" mx-2 fuente5" >Buscar: </label>
@@ -301,9 +301,11 @@ const FilaRol=({setEjecutarConsulta,task,index})=>{
                   
                   </a>
                   <a href="#" >
-                    {edit? <MdCancel className="text-warning" onClick={() => handleEliminar(task.id)}/>
+                    {edit? <MdCancel className="text-warning" onClick={() => setEdit(!edit)}/>
                     :
-                    <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
+                    <>
+                    {/* <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/> */}
+                    </>
                     }
                   
                   </a>

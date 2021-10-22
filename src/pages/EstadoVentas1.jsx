@@ -192,11 +192,11 @@ function EstadoVentas1() {
                   </td>
                   <td>
                   <Link to={`/EstadoVentas1/${task.id}`} className="mx-2">
-                  <BsPencilSquare className="colori"/>
+                  <BsPencilSquare className="text-primary"/>
                   </Link>
-                  <Link href="#" >
+                  {/* <Link href="#" >
                   <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
-                  </Link>
+                  </Link> */}
                   </td>
                 </tr>
               )

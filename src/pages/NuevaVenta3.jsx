@@ -42,6 +42,8 @@ function NuevaVenta1() {
      const [fecha, setFecha] = useState('')
      const [loading, setLoading] = useState(false)
 
+     const [valoracion, setValoracion] = useState(false)
+
      const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
      const [servicios, setServicios] = useState([]);
      const [facturas, setFacturas] = useState([]);
@@ -423,6 +425,7 @@ const handleInput7 = (e) => {
             });
   
             GuardarFactura()
+            AgregarCliente()
             setTimeout(function (){window.location.href="/EstadoVentas1"},3000)
             
           }
@@ -439,20 +442,45 @@ const handleInput7 = (e) => {
 
     const AgregarCliente =()=>{
 
-      const arregloTemporal2 =([{
-        
-        cedula:Number(cedula),
-        nombre
-      }
-      ])
 
-      for(var i=0;i<clientes.length;++i){
-                  
-        if(clientes[i].cedula!==Number(cedula)){
-          arregloTemporal2.forEach((cliente) => guardarDatabase('Clientes', cliente))
-          break;
+      const arregloTemporalx=([...clientes])
+      
+      
+      /* for(var i=0;i<arregloTemporalx.length;++i){
+
+        if(Number(cedula)===Number(arregloTemporalx[i].cedula)){
+
+          console.log("existe");
+          setValoracion(false)
+          
         }
-    }
+
+      } */
+      
+      const cedula1=cedula
+
+      /* console.log(clientes.some(item => item.cedula==cedula1)) */
+      
+     const arregloTemporal2=
+     {
+      
+      cedula:Number(cedula),
+      nombre:nombre}
+      
+      if(!clientes.some(item => item.cedula==cedula1)){
+
+        console.log("ingreso cliente")
+        database.collection("Clientes").doc(nanoid()).set(arregloTemporal2 )
+        
+      }
+
+
+      /* if(valoracion){
+    
+      database.collection("Clientes").doc(nanoid()).set(arregloTemporal2 )
+        setValoracion(false)
+    } */
+      
   }
 
     const  GuardarFactura= async()=>{
@@ -504,7 +532,7 @@ const handleInput7 = (e) => {
       arregloTemporal5.forEach((factura) => guardarDatabase('Facturas', factura))
 
 
-      AgregarCliente()
+      
 
       setLoading(false)
       /* guardarDatabase(arregloTemporal5,"Facturas") */

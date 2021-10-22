@@ -8,8 +8,8 @@ import HeaderSer from "components/HeaderSer";
 import Logot3 from 'media/isotop.png';
 
 import Acciones2 from "components/Acciones2";
-import {upDatabase,database,consultarDatabase,guardarDatabase,consultarDocumentoDatabase,actualizarDocumentoDatabase} from 'firebase'
-
+import {eliminarDocumentoDatabase,upDatabase,database,consultarDatabase,guardarDatabase,consultarDocumentoDatabase,actualizarDocumentoDatabase} from 'firebase'
+import swal from 'sweetalert'
 
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 import { MdCancel } from 'react-icons/md'
@@ -24,7 +24,7 @@ function Servicios1() {
 
     const [servicios, setServicios] = useState([]);
     const [loading, setLoading] = useState(false)
-
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true)
 
 
 
@@ -33,15 +33,18 @@ function Servicios1() {
 //descargar info
 useEffect(() => {
   setLoading(true)
-    cargarDatos()
-  }, [])
+  cargarDatos();
+  if (ejecutarConsulta) {
+    cargarDatos();
+  }
+  }, [ejecutarConsulta])
   
   const cargarDatos = async () => {
     // console.log('Entro..!');
     const listaTemporal1 = await consultarDatabase('Servicios')
     // console.log(listaTemporal);
     setServicios(listaTemporal1)
-  
+    setEjecutarConsulta(false)
     setLoading(false)
   }
 
@@ -101,8 +104,11 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
             </div>
             <br />
             <div className="d-block w-100 mb-3 gap-3 fuente3 centrar">
+            
                 <CardGroup className="centrar fuente3">
+                
                     <Card className=" cardColor w-100text-white shablack">
+                    <br />
                     <div className="d-inline-flex mb-3 centrar">
                     
                     <label className=" mx-2 fuente5" >Buscar: </label>
@@ -147,7 +153,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
         {
               vehiculosFiltrados.map((task,index) => 
               (
-                <FilaServicio task={task} index={index}/>
+                <FilaServicio task={task} index={index} setEjecutarConsulta={setEjecutarConsulta}/>
               )
               
               
@@ -171,10 +177,9 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
     );
 }
 
-const FilaServicio=({task,index})=>{
+const FilaServicio=({setEjecutarConsulta,task,index})=>{
 
-  const [servicios, setServicios] = useState([]);
-  const [loading, setLoading] = useState(false)
+  
 
   const handleEliminar = (id) => {
     
@@ -199,21 +204,7 @@ const FilaServicio=({task,index})=>{
   }
 
 
-  useEffect(() => {
-    
-      cargarDatos()
-
-    }, [])
-
-    const cargarDatos = async () => {
-      // console.log('Entro..!');
-      const listaTemporal1 = await consultarDatabase('Servicios')
-      // console.log(listaTemporal);
-      setServicios(listaTemporal1)
-    
-      setLoading(false)
-    }
-
+  
   const [edit,setEdit]=useState(false)
 
   const [editServicio, setEditServicio] = useState({
@@ -226,11 +217,46 @@ const FilaServicio=({task,index})=>{
   });
 
   const actualizarServicio = async () => {
-    setLoading(true)
+    
     await actualizarDocumentoDatabase ("Servicios",task.id,editServicio)
     setEdit(false)
-    setLoading(false)
+   
+    setEjecutarConsulta(true);
   }
+
+
+  const notifyEliminar = () => {
+      
+    
+     
+    swal({
+      title: "Deseas Eliminar el Servicio?",
+      text: "Se eliminara el servicio la base!",
+      icon: "warning",
+      buttons: ["Si", "No"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Operacion Cancelada!",{icon: "error"});
+      } else {
+        
+  
+        swal("Servicio Eliminado!", {
+          icon: "success",
+        });
+  
+        EliminacionItem()
+        setTimeout(function (){window.location.href="/Servicios1"},3000)
+        
+      }
+    });
+  
+    }
+
+    const EliminacionItem= async()=>{
+      eliminarDocumentoDatabase("Servicios",task.id)
+    }
 
   return(
 
@@ -296,9 +322,9 @@ const FilaServicio=({task,index})=>{
                   
                   </a>
                   <a href="#" >
-                    {edit? <MdCancel className="text-warning" onClick={() => handleEliminar(task.id)}/>
+                    {edit? <MdCancel className="text-warning" onClick={() => setEdit(!edit)}/>
                     :
-                    <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
+                    <BsTrash className="text-danger" onClick={() => notifyEliminar()}/>
                     }
                   
                   </a>

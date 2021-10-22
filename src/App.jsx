@@ -11,11 +11,13 @@ import Servicios1 from "pages/Servicios1";
 import Roles1 from "pages/Roles1";
 import Login from "pages/Login";
 import { AuthProvider } from "firebase"
+/* import { AuthProvider } from "contexts/AuthContext" */
 
 import PrivateLayout from 'Layouts/PrivateLayout';
 import PrivateLayout2 from 'Layouts/PrivateLayout2';
-
-
+import AuthLayout from 'Layouts/AuthLayout';
+import PublicLayout from 'Layouts/PublicLayout';
+import PrivateRoute from 'components/PrivateRoute';
 /* import PublicLayout from 'layouts/PublicLayout';
 import Index from 'pages/Index';
 import Admin from 'pages/admin/Index';
@@ -38,36 +40,24 @@ function App() {
             <Switch>
 
               {/* Ruta Administrador */}
+
+              
               <Route path={['/Home', '/NuevaVenta3','/EstadoVentas1/:id', '/EstadoVentas1', '/ModificacionVenta1', '/NuevoServicio1', '/Roles1', '/Servicios1']}>
                 <PrivateLayout>
                   <Switch>
-                    <Route path='/Home'>
-                      <Home />
-                    </Route>
-
-                    <Route path='/NuevaVenta3'>
-                      <NuevaVenta3 />
-                    </Route>
-
-                    
+                    <Route exact path='/Home' component={Home}/>
+            
+                    <Route exact path='/NuevaVenta3' component={NuevaVenta3}/>
 
                     <Route exact path='/EstadoVentas1/:idServicio' component={ModificacionVenta1}/>
                       
-                    <Route path='/EstadoVentas1'>
-                      <EstadoVentas1 />
-                    </Route>
+                    <Route exact path='/EstadoVentas1' component={EstadoVentas1}/>
 
-                    <Route path='/NuevoServicio1'>
-                      <NuevoServicio1 />
-                    </Route>
+                    <Route exact path='/NuevoServicio1' component={NuevoServicio1}/>
 
-                    <Route path='/Roles1'>
-                      <Roles1 />
-                    </Route>
+                    <Route exact path='/Roles1' component={Roles1}/>
 
-                    <Route path='/Servicios1'>
-                      <Servicios1 />
-                    </Route>
+                    <Route exact path='/Servicios1' component={Servicios1}/>
 
                     <Route path='*'>
                       <h1>404 Not found</h1>
@@ -75,33 +65,29 @@ function App() {
 
                   </Switch>
                 </PrivateLayout>
-              </Route>
+              </Route>             
+
 
               <Route path={['/Login']}>
               <AuthProvider>
-                {/* <AuthLayout> */}
+                <AuthLayout>
                   <Switch>
-                    <Route path='/Login'>
-                      <Login />
-                    </Route>
+                    <Route exact path='/Login' component={Login}/>
+
                     {/* <Route path='/Index'>
                       <Registro />
                     </Route> */}
                   </Switch>
-                {/* </AuthLayout> */}
+                </AuthLayout>
                 </AuthProvider>
               </Route>
 
 
               <Route path={['/']}>
-                {/* <PublicLayout> */}
-                  <Route path='/'>
-                    <Index />
-                  </Route>
-                {/* </PublicLayout> */}
+                <PublicLayout>
+                  <Route path='/' component={Index}/>
+                </PublicLayout>
               </Route>
-
-
 
             </Switch>
 </Router>

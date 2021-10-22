@@ -4,6 +4,7 @@ import Google from 'media/google.png';
 import {Form,Image,Button,Nav,Alert} from "react-bootstrap"
 import { signGooglePop,useAuth} from "firebase"
 import tarif2 from 'media/logot3.png';
+import { Loading } from 'components/Loading'
 
 
 export default function Login() {
@@ -14,6 +15,8 @@ export default function Login() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+
+  
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -64,7 +67,7 @@ export default function Login() {
         onClick={()=>{document.getElementById('google').addEventListener("click",signGooglePop())}}
         >
           <Image src={Google} rounded width="20" height="20"/>
-          <h3 class="text-right textox fuente3">Registrate</h3>
+          <h3 class="text-right textox fuente3">SingIn with Google</h3>
         </Nav.Link>
       </div>
       
