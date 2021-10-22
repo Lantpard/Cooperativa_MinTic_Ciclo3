@@ -6,8 +6,9 @@ import { nanoid } from 'nanoid';
 import { initializeApp } from 'firebase/app'
 // Referencia a la base de datos
 import { getFirestore } from 'firebase/firestore'
+import { onAuthStateChanged } from "@firebase/auth"
 // Referencia al paquete de autenticacion
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 // Metodos de interaccion con la base de datos
 import { addDoc, collection, getDocs, query, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 

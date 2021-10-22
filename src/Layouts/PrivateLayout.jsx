@@ -1,37 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState}  from "react"
 import BarNav from 'components/BarNav';
-import { getAuth } from "firebase/auth"
+
+import { useAuth } from 'firebase';
 import PrivateRoute from 'components/PrivateRoute'
+import {consultarDocumentoDatabase} from 'firebase'
+import { Loading } from 'components/Loading'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 
-/* import Footer from 'components/Footer'; */
 
-const PrivateLayout = ({ children }) => {
+
+const PrivateLayout = ({ children,perfil }) => {
   
   const auth = getAuth();
 const user = auth.currentUser;
 
 
 
-if (user !== null) {
-  user.providerData.forEach((profile) => {
-    console.log("Sign-in provider: " + profile.providerId);
-    console.log("  Provider-specific UID: " + profile.uid);
-    console.log("  Name: " + profile.displayName);
-    console.log("  Email: " + profile.email);
-    console.log("  Photo URL: " + profile.photoURL);
-
-    
-  });
-}
-
-  /* const {isLoading,isAuthenticated}=useAuth() */
-
-
   return (
     <div className='flex flex-col justify-between h-screen'>
     <PrivateRoute>
     <div className='flex flex-col justify-between h-screen'>
-      <BarNav   />
+      <BarNav   perfil={perfil}/>
       <main className='h-full overflow-y-scroll bg-blue-400'>
         {children}
         </main>

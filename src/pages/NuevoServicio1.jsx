@@ -235,9 +235,9 @@ const notifyGuardar1 = () => {
                 <Card className=" cardColor  text-white shablack ">
                 <br />
 
-            <div className="w-100 centrar mx-5">
+            <div className="w-100 centrar justify-content-center align-items-center mx-5">
                 
-                <form className="d-block w-100 mb-3 gap-3 mx-3" controlId="formCodigo" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
+                <form className="d-block-flex w-100 mb-3 gap-3 mx-3 justify-content-center align-items-center" controlId="formCodigo" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
                     
                     <div className="d-inline-flex w-75 mb-4 centrar gap-3 mx-2 my-2">
                     <label className="w-25 mx-3" >Codigo</label>
