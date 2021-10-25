@@ -52,8 +52,15 @@ function EstadoVentas1() {
 
       //descargar filtrar
       const [busqueda, setBusqueda] = useState('');
+      const [busqueda2, setBusqueda2] = useState('');
+      const [busqueda3, setBusqueda3] = useState('');
+      const [busqueda4, setBusqueda4] = useState('');
+      const [busqueda5, setBusqueda5] = useState('');
   const [vehiculosFiltrados, setVehiculosFiltrados] = useState(facturas);
 
+
+
+      ////Factura
       useEffect(() => {
           console.log("busqueda",busqueda)
           console.log("sinfiltro",vehiculosFiltrados)
@@ -61,7 +68,7 @@ function EstadoVentas1() {
         setVehiculosFiltrados(
             facturas.filter((elemento) => {
                 /* return elemento.Vendedor.includes(busqueda) */
-            return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+            return JSON.stringify(elemento.factura).toLowerCase().includes(busqueda.toLowerCase());
           })
         );
 
@@ -69,6 +76,69 @@ function EstadoVentas1() {
       }, [busqueda, facturas]);
 
 
+       ////id cliente
+       useEffect(() => {
+        console.log("busqueda",busqueda)
+        console.log("sinfiltro",vehiculosFiltrados)
+
+      setVehiculosFiltrados(
+          facturas.filter((elemento) => {
+              /* return elemento.Vendedor.includes(busqueda) */
+          return JSON.stringify(elemento.id_cliente).toLowerCase().includes(busqueda2.toLowerCase());
+        })
+      );
+
+      console.log("con filtro",vehiculosFiltrados)
+    }, [busqueda2, facturas]);
+
+
+     ////cliente
+     useEffect(() => {
+      console.log("busqueda",busqueda)
+      console.log("sinfiltro",vehiculosFiltrados)
+
+    setVehiculosFiltrados(
+        facturas.filter((elemento) => {
+            /* return elemento.Vendedor.includes(busqueda) */
+        return JSON.stringify(elemento.nombre).toLowerCase().includes(busqueda3.toLowerCase());
+      })
+    );
+
+    console.log("con filtro",vehiculosFiltrados)
+  }, [busqueda3, facturas]);
+
+
+   ////vendedor
+   useEffect(() => {
+    console.log("busqueda",busqueda)
+    console.log("sinfiltro",vehiculosFiltrados)
+
+  setVehiculosFiltrados(
+      facturas.filter((elemento) => {
+          /* return elemento.Vendedor.includes(busqueda) */
+      return JSON.stringify(elemento.vendedor).toLowerCase().includes(busqueda4.toLowerCase());
+    })
+  );
+
+  console.log("con filtro",vehiculosFiltrados)
+}, [busqueda4, facturas]);
+
+
+
+ ////estado
+ useEffect(() => {
+  console.log("busqueda",busqueda)
+  console.log("sinfiltro",vehiculosFiltrados)
+
+setVehiculosFiltrados(
+    facturas.filter((elemento) => {
+        /* return elemento.Vendedor.includes(busqueda) */
+    return JSON.stringify(elemento.estado).toLowerCase().includes(busqueda5.toLowerCase());
+  })
+);
+
+console.log("con filtro",vehiculosFiltrados)
+}, [busqueda5, facturas]);
 
 
     
@@ -139,7 +209,39 @@ function GetSortOrder(prop) {
                     type="text" value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
                         
-                        placeholder="Busqueda Dinamica"/>
+                        placeholder="Factura"/>
+
+<input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda2}
+                        onChange={(e) => setBusqueda2(e.target.value)}
+                        
+                        placeholder="Id Cliente"/>
+
+<input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda3}
+                        onChange={(e) => setBusqueda3(e.target.value)}
+                        
+                        placeholder="Cliente"/>
+
+<input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda4}
+                        onChange={(e) => setBusqueda4(e.target.value)}
+                        
+                        placeholder="Vendedor"/>
+
+<input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda5}
+                        onChange={(e) => setBusqueda5(e.target.value)}
+                        
+                        placeholder="Estado"/>
 
                 
                     </div>

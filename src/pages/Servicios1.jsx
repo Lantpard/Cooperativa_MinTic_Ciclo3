@@ -53,8 +53,11 @@ useEffect(() => {
     
 //descargar filtrar
 const [busqueda, setBusqueda] = useState('');
+const [busqueda2, setBusqueda2] = useState('');
+const [busqueda3, setBusqueda3] = useState('');
 const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
 
+    ///busqueda por codigo
     useEffect(() => {
         console.log("busqueda",busqueda)
         console.log("sinfiltro",vehiculosFiltrados)
@@ -62,13 +65,43 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
       setVehiculosFiltrados(
           servicios.filter((elemento) => {
               /* return elemento.Vendedor.includes(busqueda) */
-          return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+          return JSON.stringify(elemento.codigo).toLowerCase().includes(busqueda.toLowerCase());
         })
       );
 
       console.log("con filtro",vehiculosFiltrados)
     }, [busqueda, servicios]);
 
+    ///busqueda por servicio
+    useEffect(() => {
+      console.log("busqueda",busqueda)
+      console.log("sinfiltro",vehiculosFiltrados)
+
+    setVehiculosFiltrados(
+        servicios.filter((elemento) => {
+            /* return elemento.Vendedor.includes(busqueda) */
+        return JSON.stringify(elemento.servicio).toLowerCase().includes(busqueda2.toLowerCase());
+      })
+    );
+
+    console.log("con filtro",vehiculosFiltrados)
+  }, [busqueda2, servicios]);
+
+
+  ///busqueda por estado
+  useEffect(() => {
+    console.log("busqueda",busqueda)
+    console.log("sinfiltro",vehiculosFiltrados)
+
+  setVehiculosFiltrados(
+      servicios.filter((elemento) => {
+          /* return elemento.Vendedor.includes(busqueda) */
+      return JSON.stringify(elemento.estado).toLowerCase().includes(busqueda3.toLowerCase());
+    })
+  );
+
+  console.log("con filtro",vehiculosFiltrados)
+}, [busqueda3, servicios]);
 
 
     const handleEliminar = (id) => {
@@ -122,8 +155,24 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
                     type="text" value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
                         
-                        placeholder="Busqueda Dinamica"/>
-            
+                        placeholder="Codigo"/>
+                    
+                    
+                    <input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda2}
+                        onChange={(e) => setBusqueda2(e.target.value)}
+                        
+                        placeholder="Servicio"/>
+
+                    <input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda3}
+                        onChange={(e) => setBusqueda3(e.target.value)}
+                        
+                        placeholder="Estado"/>
                 
                     </div>
                     </Card>

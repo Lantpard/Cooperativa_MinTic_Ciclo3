@@ -49,8 +49,13 @@ useEffect(() => {
     
 //descargar filtrar
 const [busqueda, setBusqueda] = useState('');
+const [busqueda2, setBusqueda2] = useState('');
+const [busqueda3, setBusqueda3] = useState('');
+const [busqueda4, setBusqueda4] = useState('');
 const [vehiculosFiltrados, setVehiculosFiltrados] = useState(roles);
 
+
+    //////email
     useEffect(() => {
         console.log("busqueda",busqueda)
         console.log("sinfiltro",vehiculosFiltrados)
@@ -58,12 +63,61 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(roles);
       setVehiculosFiltrados(
           roles.filter((elemento) => {
               /* return elemento.Vendedor.includes(busqueda) */
-          return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+          return JSON.stringify(elemento.email).toLowerCase().includes(busqueda.toLowerCase());
         })
       );
 
       console.log("con filtro",vehiculosFiltrados)
     }, [busqueda, roles]);
+
+
+    /// Nombre
+    useEffect(() => {
+      console.log("busqueda",busqueda)
+      console.log("sinfiltro",vehiculosFiltrados)
+
+    setVehiculosFiltrados(
+        roles.filter((elemento) => {
+            /* return elemento.Vendedor.includes(busqueda) */
+        return JSON.stringify(elemento.nombre).toLowerCase().includes(busqueda2.toLowerCase());
+      })
+    );
+
+    console.log("con filtro",vehiculosFiltrados)
+  }, [busqueda2, roles]);
+
+
+
+  /// Perfil
+  useEffect(() => {
+    console.log("busqueda",busqueda)
+    console.log("sinfiltro",vehiculosFiltrados)
+
+  setVehiculosFiltrados(
+      roles.filter((elemento) => {
+          /* return elemento.Vendedor.includes(busqueda) */
+      return JSON.stringify(elemento.perfil).toLowerCase().includes(busqueda3.toLowerCase());
+    })
+  );
+
+  console.log("con filtro",vehiculosFiltrados)
+}, [busqueda3, roles]);
+
+
+/// Estado
+useEffect(() => {
+  console.log("busqueda",busqueda)
+  console.log("sinfiltro",vehiculosFiltrados)
+
+setVehiculosFiltrados(
+    roles.filter((elemento) => {
+        /* return elemento.Vendedor.includes(busqueda) */
+    return JSON.stringify(elemento.estado).toLowerCase().includes(busqueda4.toLowerCase());
+  })
+);
+
+console.log("con filtro",vehiculosFiltrados)
+}, [busqueda4, roles]);
 
 
 
@@ -125,9 +179,36 @@ function GetSortOrder(prop) {
                     type="text" value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
                         
-                        placeholder="Busqueda Dinamica"/>
+                        placeholder="email"/>
             
                 
+
+                    <input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda2}
+                        onChange={(e) => setBusqueda2(e.target.value)}
+                        
+                        placeholder="nombre"/>
+
+
+                <input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda3}
+                        onChange={(e) => setBusqueda3(e.target.value)}
+                        
+                        placeholder="perfil"/>
+
+
+                  <input 
+                    
+                    className=" centrar mx-2 " 
+                    type="text" value={busqueda4}
+                        onChange={(e) => setBusqueda4(e.target.value)}
+                        
+                        placeholder="estado"/>
+
                     </div>
                 </Card>
                 </CardGroup>
