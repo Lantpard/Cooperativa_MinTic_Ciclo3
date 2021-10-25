@@ -55,9 +55,9 @@ function App() {
             setFirebaseUser(usuario)
             console.log('El usuario logueado');
             consultarProducto(usuario.email)
-            setProfileName(user.displayName?user.displayName:user.email)
+            
             setProfileUid(user.uid)
-            setProfileMail(user.email)
+            
             setProfileFoto(user.photoURL)
             setUserData(user)
             buscarDocumentOrCrearDocumento(user.email)
@@ -82,6 +82,8 @@ const consultarProducto = async (task) => {
   console.log(productoTemp)
   setPerfil(productoTemp.perfil)
   console.log("haber",perfil)
+  setProfileName(productoTemp.nombre?productoTemp.nombre:productoTemp.email)
+  setProfileMail(productoTemp.email)
   setLoading(false)
 }
 
