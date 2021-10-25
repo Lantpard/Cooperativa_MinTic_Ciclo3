@@ -9,6 +9,7 @@ import NuevoServicio1 from "pages/NuevoServicio1";
 import Servicios1 from "pages/Servicios1";
 import Roles1 from "pages/Roles1";
 import Login from "pages/Login";
+import Singin from "pages/Singin";
 import { AuthProvider ,auth,database,consultarDatabase,consultarDocumentoDatabase} from "firebase"
 import PrivateLayout from 'Layouts/PrivateLayout';
 import AuthLayout from 'Layouts/AuthLayout';
@@ -18,6 +19,7 @@ import { onAuthStateChanged } from "@firebase/auth"
 import { Loading2 } from 'components/Loading2'
 import { AppProvider,AppContext } from 'context/AppProvider';
 import { UserContext } from 'context/userContext';
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 function App() {
   const [firebaseUser, setFirebaseUser] = useState(false)
@@ -31,6 +33,10 @@ function App() {
   const [userData, setUserData] = useState('')
   const holax='desde aPP'
 
+  let name1=''
+  let email1=''
+  
+
   useEffect(() => {
     setLoading(true)
 
@@ -41,18 +47,23 @@ function App() {
                 id: user.uid,
                 email: user.email
             }
+            name1=user.displayName
+            email1=user.email
+
             console.log(usuario);
             console.log(user);
             setFirebaseUser(usuario)
             console.log('El usuario logueado');
-            consultarProducto(usuario.id)
+            consultarProducto(usuario.email)
             setProfileName(user.displayName?user.displayName:user.email)
             setProfileUid(user.uid)
             setProfileMail(user.email)
             setProfileFoto(user.photoURL)
             setUserData(user)
-
+            buscarDocumentOrCrearDocumento(user.email)
             
+
+
 
         } else {
             console.log('El usuario ya no esta logueado');
@@ -74,6 +85,30 @@ const consultarProducto = async (task) => {
   setLoading(false)
 }
 
+
+async function buscarDocumentOrCrearDocumento(idDocumento) {
+  //crear referencia al documento
+  const docuRef = doc(database, `Roles/${idDocumento}`);
+  // buscar documento
+  const consulta = await getDoc(docuRef);
+  // revisar si existe
+  if (consulta.exists()) {
+    // si sí existe
+    const infoDocu = consulta.data();
+    return infoDocu.perfil;
+  } else {
+    // si no existe
+    await setDoc(docuRef, { email:email1,
+      estado: "Autorizado",
+      id_vendedor: Number('000'),
+      nombre: name1,
+      perfil: "Vendedor"   
+    });
+    const consulta = await getDoc(docuRef);
+    const infoDocu = consulta.data();
+    return infoDocu.perfil;
+  }
+}
 
   return (
     /* <UserContext> */
@@ -142,11 +177,12 @@ const consultarProducto = async (task) => {
               </Route>             
               
 
-              <Route path={['/Login']}>
+              <Route path={['/Login','/Singin']}>
               <AuthProvider>
                 <AuthLayout>
                   <Switch>
                     <Route exact path='/Login' component={Login}/>
+                    <Route exact path='/Singin' component={Singin}/>
 
                     
                   </Switch>

@@ -61,6 +61,13 @@ export default function Login() {
           Sign In</Button>
       
       </Form>
+      <div class="d-inline-flex gap-3 centrar">
+        <Nav.Link id="google" href={"/Singin"}
+        
+        >
+          <h3 class="text-right textox fuente3">Registrate</h3>
+        </Nav.Link>
+      </div>
       <br />
       <div class="d-inline-flex gap-3 centrar">
         <Nav.Link id="google" /* onClick= {GoogleIn()} */
