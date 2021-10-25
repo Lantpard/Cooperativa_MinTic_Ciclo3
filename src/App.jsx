@@ -15,15 +15,24 @@ import AuthLayout from 'Layouts/AuthLayout';
 import PublicLayout from 'Layouts/PublicLayout';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { onAuthStateChanged } from "@firebase/auth"
+import { Loading2 } from 'components/Loading2'
+import { AppProvider,AppContext } from 'context/AppProvider';
+import { UserContext } from 'context/userContext';
 
 function App() {
   const [firebaseUser, setFirebaseUser] = useState(false)
-  
+  const [loading, setLoading] = useState(false)
   const [rol, setRol] = useState([])
   const [perfil,setPerfil]=useState("Vendedor")
-  
+  const [profileName, setProfileName] = useState('');
+  const [profileMail, setProfileMail] = useState('');
+  const [profileFoto, setProfileFoto] = useState('');
+  const [profileUid, setProfileUid] = useState('');
+  const [userData, setUserData] = useState('')
+  const holax='desde aPP'
 
   useEffect(() => {
+    setLoading(true)
 
     onAuthStateChanged(auth, (user) => {
 
@@ -37,6 +46,13 @@ function App() {
             setFirebaseUser(usuario)
             console.log('El usuario logueado');
             consultarProducto(usuario.id)
+            setProfileName(user.displayName?user.displayName:user.email)
+            setProfileUid(user.uid)
+            setProfileMail(user.email)
+            setProfileFoto(user.photoURL)
+            setUserData(user)
+
+            
 
         } else {
             console.log('El usuario ya no esta logueado');
@@ -55,24 +71,44 @@ const consultarProducto = async (task) => {
   console.log(productoTemp)
   setPerfil(productoTemp.perfil)
   console.log("haber",perfil)
+  setLoading(false)
 }
 
 
   return (
+    /* <UserContext> */
     <div className='App'>
 
 <Router>
             <Switch>
 
-             
+            
 
               
               <Route path={['/Home', '/NuevaVenta3','/EstadoVentas1/:id', '/EstadoVentas1', '/ModificacionVenta1', '/NuevoServicio1', '/Roles1', '/Servicios1']}>
-                <PrivateLayout perfil={perfil}>
+                
+              {
+        loading
+          ?
+          <Loading2 />
+          :
+          <>
+
+                
+                <PrivateLayout perfil={perfil}
+                profileName={profileName}
+                profileUid={profileUid}
+                profileMail={profileMail}
+                profileFoto={profileFoto}
+                
+                >
+                <UserContext.Provider value={{ perfil,profileName,profileUid,profileMail,profileFoto }}>
+                <AppProvider value={holax}>
                   <Switch>
+                    
                     <Route exact path='/Home' component={Home}/>
             
-                    <Route exact path='/NuevaVenta3' component={NuevaVenta3}/>
+                    <Route exact path='/NuevaVenta3'  profileName={profileName} component={NuevaVenta3}/>
 
                     <Route exact path='/EstadoVentas1/:idServicio' component={ModificacionVenta1}/>
                       
@@ -93,11 +129,18 @@ const consultarProducto = async (task) => {
                     <Route path='*'>
                       <h1>404 Not found</h1>
                     </Route>
-
+                    
                   </Switch>
-                </PrivateLayout>
-              </Route>             
 
+                  </AppProvider>
+                  </UserContext.Provider>
+                </PrivateLayout>
+                
+
+                </>
+      }
+              </Route>             
+              
 
               <Route path={['/Login']}>
               <AuthProvider>
@@ -117,11 +160,13 @@ const consultarProducto = async (task) => {
                   <Route path='/' component={Index}/>
                 </PublicLayout>
               </Route>
+              
 
             </Switch>
 </Router>
 
     </div>
+    /* </UserContext> */
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef }  from "react"
-/* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
+import { Link } from "react-router-dom"
 /* import Index from "pages/index" */
 import {logOutUsuario,usuario,consultarDatabase} from 'firebase'
 import {Image,Nav,Dropdown,Card} from "react-bootstrap"
@@ -10,32 +10,22 @@ import { getAuth } from "firebase/auth";
 import { Loading } from 'components/Loading'
 
 
-function BarNav ({perfil}) {
 
-  console.log("el perfil del usuario es x: ",perfil)
-
+function BarNav ({ children,perfil,profileName,profileUid,profileMail,profileFoto }) {
   
+   
 
   const auth = getAuth();
   /* const auth = useAuth(); */
   const user = auth.currentUser;
   
-  const [profilename, setProfileName] = useState('');
-  const [profilemail, setProfileMail] = useState('');
-  const [profilefoto, setProfileFoto] = useState('');
-  const [profileuid, setProfileUid] = useState('');
+  
   const [roles, setRoles] = useState([]);
   const [admin, setAdmin] = useState(false);
 
   
 
-  useEffect(() => {
-    /* cargarDatos() */
-  setProfileName(user.displayName)
-  setProfileUid(user.uid)
-  setProfileMail(user.email)
-  setProfileFoto(user.photoURL)
-    }, [])
+  
 
 
    /*  const cargarDatos = async () => {
@@ -120,48 +110,42 @@ function BarNav ({perfil}) {
       <Card.Header >
           <Nav className=" centrar gap-4 mx-2" variant="tabs"  defaultActiveKey="/Home">
             <Image src={Logot3} rounded height="40"/> 
-          <Nav.Item>
-        <Nav.Link className="linkColor gap-5 mx-2" href="/Home">Home</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link id="nVenta" className="linkColor gap-5 mx-2" 
-        href="/NuevaVenta3"
-        >Nueva Venta</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link className="linkColor gap-5 mx-2" href="/EstadoVentas1">Estado Ventas</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
+          
+        <Link className=" btn btn-success linkColor gap-5 mx-2" activeClassName="active" to="/Home">Home</Link>
+      
+        <Link id="nVenta" className=" btn btn-success linkColor gap-5 mx-2" activeClassName="active" profileName={profileName}
+        to="/NuevaVenta3"
+        >Nueva Venta</Link>
+      
+        <Link className="btn btn-success linkColor gap-5 mx-2" activeClassName="active" to="/EstadoVentas1">Estado Ventas</Link>
+      
 
         {!!(perfil=="Administrador")
         
-        &&<Nav.Link className="linkColor gap-5 mx-2" href="/NuevoServicio1">Nuevo Servicio</Nav.Link>}
+        &&<Link className="btn btn-success linkColor gap-5 mx-2" activeClassName="active" to="/NuevoServicio1">Nuevo Servicio</Link>}
 
 
-      </Nav.Item>
-      <Nav.Item>
+     
       {!!(perfil=="Administrador")
         
-        &&<Nav.Link className="linkColor gap-5 mx-2" href="/Servicios1" 
-        >Servicios</Nav.Link>}
-      </Nav.Item>
-      <Nav.Item>
+        &&<Link className="btn btn-success linkColor gap-5 mx-2" activeClassName="active" to="/Servicios1" 
+        >Servicios</Link>}
+      
       {!!(perfil=="Administrador")
         
-        &&<Nav.Link className="linkColor gap-5 mx-2" href="/Roles1">Roles</Nav.Link>}
-      </Nav.Item>
-      <Nav.Item >
-          <Dropdown>
-            <Dropdown.Toggle className="linkColor gap-5 mx-2"  variant="Secondary" id="dropdown-basic">
-            <img src={profilefoto} width="30" className="mx-2">
-              </img>{' '} {profilename}
+        &&<Link className="btn btn-success linkColor gap-5 mx-2" activeClassName="active" to="/Roles1">Roles</Link>}
+      
+          <Dropdown activeClassName="active">
+            <Dropdown.Toggle className="btn btn-success linkColor gap-5 mx-2"  activeClassName="active" variant="Secondary" id="dropdown-basic">
+            <img src={profileFoto} width="30" className="mx-2">
+              </img>{' '} {profileName}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
             <Dropdown.Item href="#">
-              {perfil? perfil:"general"}
+              {perfil? perfil:"Vendedor"}
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-1">{profilemail}</Dropdown.Item>
+              <Dropdown.Item href="#/action-1">{profileMail}</Dropdown.Item>
                            
               <Dropdown.Divider />
               <Dropdown.Item 
@@ -171,7 +155,7 @@ function BarNav ({perfil}) {
               href="/Index">Salir</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-      </Nav.Item>
+      
     </Nav>
   </Card.Header>
   

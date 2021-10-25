@@ -14,6 +14,7 @@ import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 import { nanoid } from 'nanoid';
 import { Loading } from 'components/Loading'
 import Logot3 from 'media/isotop.png';
+import { Tooltip } from '@material-ui/core'
 
 
 var listafac = []
@@ -95,6 +96,17 @@ function EstadoVentas1() {
       }
     
 
+      //Comparer Function    
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a[prop] > b[prop]) {    
+          return 1;    
+      } else if (a[prop] < b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+}    
 
 
     
@@ -163,7 +175,7 @@ function EstadoVentas1() {
         </thead>
         <tbody>
         {
-              vehiculosFiltrados.map((task,index) => 
+              vehiculosFiltrados.sort(GetSortOrder("factura")).map((task,index) => 
               (
                 <tr key={nanoid()}>
                   <td>
@@ -191,9 +203,11 @@ function EstadoVentas1() {
                       {task.estado}
                   </td>
                   <td>
+                  <Tooltip title='Editar' arrow>
                   <Link to={`/EstadoVentas1/${task.id}`} className="mx-2">
                   <BsPencilSquare className="text-primary"/>
                   </Link>
+                  </Tooltip>
                   {/* <Link href="#" >
                   <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
                   </Link> */}

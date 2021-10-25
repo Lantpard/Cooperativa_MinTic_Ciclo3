@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef }  from "react"
 import { nanoid } from 'nanoid';
 import {Card,CardGroup,Button,Image,Modal,Form,Table} from "react-bootstrap"
-
+import { Tooltip } from '@material-ui/core'
 
 import Logot3 from 'media/isotop.png';
 import { getAuth } from "firebase/auth";
@@ -14,8 +14,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 import { Loading } from 'components/Loading'
+import { AppContext } from 'context/AppProvider'
+import { UserContext } from 'context/userContext';
 
-export let leo="hola";
+
 /* export {handleFormulario,editar,handleGuardarEditar, handleDeshacer}; */
 
 
@@ -27,21 +29,23 @@ var uEmail=""
 
 
 function NuevaVenta1() {
-
+  const { profileName } = React.useContext(UserContext)
      //nueva tarea
      const [servicio, setServicio] = useState('')
      const [codigo, setCodigo] = useState('')
      const [cantidad, setCantidad] = useState('')
      const [precio, setPrecio] = useState('')
      const [total, setTotal] = useState('')
-     const [vendedor, setVendedor] = useState('')
+     const [vendedor, setVendedor] = useState(profileName)
      const [nFactura, setNfactura] = useState('')
      const [nombre, setNombre] = useState('')
      const [cedula, setCedula] = useState('')
      const [descripcion, setDescripcion] = useState('')
-     const [fecha, setFecha] = useState('')
+     const [fecha, setFecha] = useState(new Date(Date.now()).toISOString().substring(0, 10))
      const [loading, setLoading] = useState(false)
+     const [val,setVal]=useState(false)
 
+     
      const [valoracion, setValoracion] = useState(false)
 
      const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
@@ -52,10 +56,32 @@ function NuevaVenta1() {
     const [listaTarea, setListaTarea] = useState([])
     const [FacturaLista, setFacturaLista] = useState([]);
     const [rege, setRege] = useState([])
-    
-    
+
+    const { hola,hola2,holax } = React.useContext(AppContext)
+
    
- 
+
+    
+
+    console.log(hola)
+    console.log(hola2)
+    console.log(holax)
+    /* let nefecha = new  Date(Date.now())
+    let netfecha = nefecha.toLocaleDateString()
+    let formatx=netfecha.split("/")
+    let newfecha=formatx[2]+"-"+formatx[1]+"-"+formatx[0]
+    
+    console.log("la fecha es1",nefecha)
+    console.log("la fecha es2",netfecha)
+    console.log("la fecha modificada",newfecha)
+   
+    
+    console.log("la fecha en sistema es ",fecha) */
+
+    
+
+    console.log("el profi en venta es",profileName)
+
       // Estados de modificacion
       const [editar, setEditar] = useState(false)
       
@@ -106,14 +132,25 @@ const cargarDatos = async () => {
   // console.log(listaTemporal);
   setClientes(listaTemporal3)
 
-  const auth = await getAuth();
+ /*  const auth = await getAuth();
   const user = auth.currentUser;
-  uNombre=user.displayName
+  
+  
+  user.displayName? uNombre=user.displayName : uNombre=user.email;
+
+ 
+
   uEmail=user.email
   console.log(uNombre)
 
-  setVendedor(uNombre) 
-  setNfactura((listaTemporal1.length)+1)
+  setVendedor(uNombre)  */
+
+  
+  console.log('0'.padStart(6, 0))
+
+
+  
+  setNfactura("F"+((listaTemporal1.length)+1).toString().padStart(7, 0))
   setLoading(false)
 
 }
@@ -306,6 +343,15 @@ const handleInput7 = (e) => {
       // return !(elemento.id === id)
     })
     setListaTarea(arregloTemporal)
+
+     //// suma
+     let suma=0
+  
+     for(var i=0;i<arregloTemporal.length;++i){
+       suma+=( Number(arregloTemporal[i].cantidad)*arregloTemporal[i].precio)
+     }
+       
+     setTotal(suma)
     
   }
 
@@ -358,14 +404,14 @@ const handleInput7 = (e) => {
 
     const notify = () => {
     
-      
+    
     
     if(servicio==""){
       toast.error("Cogido no valido");
     }else{
     toast.success("Servicio Agregado")
       };
-
+    
         
     }
     
@@ -404,9 +450,12 @@ const handleInput7 = (e) => {
   
   
       const notifyGuardar = () => {
-      
-    
-     
+      ////////////
+        if(!nombre.trim() || !cedula.trim() ){
+          toast.error("Faltan los datos del cliente")
+        }
+        else
+        {
         swal({
           title: "Deseas Generar la Factura?",
           text: "Se Generara la facturación de los servicios!",
@@ -432,7 +481,7 @@ const handleInput7 = (e) => {
         });
     
         
-        
+      }
             
         }
 
@@ -586,6 +635,10 @@ const handleInput7 = (e) => {
     }
   }
 
+      
+
+ 
+
 
     return (
         <div>
@@ -616,12 +669,12 @@ const handleInput7 = (e) => {
                           <div name="HeaderFact" className="d-block w-100 p-3 centrar">
                               <Form.Group className="d-inline-flex gap-4 mb-4 mx-2 centrar sinlimites" >
                                   <Form.Label className="w-25 sinlimites mx-2">Fecha</Form.Label>
-                                  <Form.Control className="borde-rad w-75 sinlimites mx-2" id="fFecha"type="date" onChange={handleInput4} value={fecha}/>
+                                  <Form.Control className="borde-rad w-75 sinlimites mx-2" id="fFecha"type="date" onChange={handleInput4} value={fecha} required/>
                               </Form.Group>
                               
                               <Form.Group className="d-inline-flex gap-4 mb-3 mx-2 centrar sinlimites" >
                                   <Form.Label className="w-50 sinlimites mx-2">Numero Factura</Form.Label>
-                                  <Form.Control className="borde-rad w-50 sinlimites mx-2" id="nFactura"type="number"  disabled="true" onChange={handleInput5} value={nFactura}/>
+                                  <Form.Control className="borde-rad w-50 sinlimites mx-2" id="nFactura"type="text"  disabled="true" onChange={handleInput5} value={nFactura}/>
                               </Form.Group>
                               
                           </div>
@@ -775,10 +828,10 @@ const handleInput7 = (e) => {
       <Card className=" cardColor w-100 text-white shablack">
         <>
           <div name="datos" className="d-block centrar w-100 p-3 gap-3 ">
-            <div>
+            <div className="centrar w-100">
               <form className="d-inline-flex w-50 mb-3 gap-3 centrar" >
                 <label>Cedula</label>
-                <input className="borde-rad" id="fCcedula"type="number" onChange={handleInput6} value={cedula}/>
+                <input className="borde-rad w-50" id="fCcedula"type="number" onChange={handleInput6} value={cedula}/>
               </form>
               <button
               className="btn btn-primary w-25 btn-sm mx-3"
@@ -790,10 +843,10 @@ const handleInput7 = (e) => {
               Buscar
             </button>
             </div>
-            <div>
+            <div className="centrar w-100">
               <Form.Group className="d-inline-flex w-50 mb-3 gap-3 centrar" >
                 <Form.Label>Nombre</Form.Label>
-                <Form.Control className="borde-rad" id="fCnombre"type="text"  onChange={handleInput7} value={nombre}/>
+                <Form.Control className="borde-rad w-50" id="fCnombre"type="text"  onChange={handleInput7} value={nombre}/>
               </Form.Group>
             </div>
           </div>
@@ -867,7 +920,7 @@ const handleInput7 = (e) => {
             </div>
                 <ToastContainer
           position="bottom-center"
-          autoClose={1000}
+          autoClose={2000}
           
           
           />

@@ -4,6 +4,7 @@ import {Container,Button,Card,CardGroup,Image,Table,Form,Modal} from "react-boot
 import Logot3 from 'media/isotop.png';
 
 import swal from 'sweetalert'
+import { Tooltip } from '@material-ui/core'
 
 import {database,consultarDatabase,guardarDatabase} from 'firebase'
 
@@ -237,7 +238,7 @@ const notifyGuardar1 = () => {
 
             <div className="w-100 centrar justify-content-center align-items-center mx-5">
                 
-                <form className="d-block-flex w-100 mb-3 gap-3 mx-3 justify-content-center align-items-center" controlId="formCodigo" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
+                <form className="d-block-flex w-100 mb-3 gap-3 mx-3 justify-content-center align-items-center" onSubmit={editar ? handleGuardarEditar : handleFormulario}>
                     
                     <div className="d-inline-flex w-75 mb-4 centrar gap-3 mx-2 my-2">
                     <label className="w-25 mx-3" >Codigo</label>
@@ -352,24 +353,16 @@ const notifyGuardar1 = () => {
                   </td>
                   <td>
                   
-                  {/* <button
-                    className="btn btn-outline-danger btn-sm mx-2"
-                    onClick={() => handleEliminar(task.id)}
-                  >
-                    Eliminar
-                  </button> */}
+                  <Tooltip title='Editar' arrow>
                   <a href="#" className="mx-2">
-                  <BsPencilSquare className="colori"  onClick={() => handleEditar(task)}/>
+                  <BsPencilSquare className="text-primary"  onClick={() => handleEditar(task)}/>
                   </a>
-                  <a href="#" >
+                  </Tooltip>
+                  <Tooltip title='Eliminar' arrow>
+                  <a href="#" className="mx-2">
                   <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
                   </a>
-                  {/* <button
-                    className="btn btn-outline-warning btn-sm"
-                    onClick={() => handleEditar(task)}
-                  >
-                    Modificar
-                  </button> */}
+                  </Tooltip>
                   </td>
                 </tr>
               )

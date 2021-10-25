@@ -4,7 +4,7 @@ import { useParams }  from "react-router-dom"
 import { nanoid } from 'nanoid';
 import {Card,CardGroup,Image, Modal,Button,Form,Table}    from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
-
+import { Tooltip } from '@material-ui/core'
 import swal from 'sweetalert'
 
 import Service from "components/Servicio";
@@ -85,7 +85,7 @@ function ModificacionVenta1() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-
+console.log("la fecha de modificacion es",fecha)
   useEffect(() => {
 
     setLoading(true)
@@ -178,6 +178,15 @@ function ModificacionVenta1() {
       // return !(elemento.id === id)
     })
     setListaTarea(arregloTemporal)
+
+     //// suma
+     let suma=0
+  
+     for(var i=0;i<arregloTemporal.length;++i){
+       suma+=( Number(arregloTemporal[i].cantidad)*arregloTemporal[i].precio)
+     }
+       
+     setTotal(suma)
     
   }
 
@@ -576,7 +585,7 @@ setPrecio('')
                               
                               <Form.Group className="d-inline-flex gap-4 mb-3 mx-2 centrar sinlimites" >
                                   <Form.Label className="w-50 sinlimites mx-2">Numero Factura</Form.Label>
-                                  <Form.Control className="borde-rad w-50 sinlimites mx-2" id="nFactura"type="number"  disabled="true" onChange={handleInput5} value={nFactura}/>
+                                  <Form.Control className="borde-rad w-50 sinlimites mx-2" id="nFactura"type="text"  disabled="true" onChange={handleInput5} value={nFactura}/>
                               </Form.Group>
                               
                           </div>
@@ -621,12 +630,17 @@ setPrecio('')
                   >
                     Eliminar
                   </button> */}
+                  <Tooltip title='Editar' arrow>
                   <a href="#" className="mx-2">
-                  <BsPencilSquare className="colori"  onClick={() => handleEditar(task)}/>
+                  <BsPencilSquare className="text-primary"  onClick={() => handleEditar(task)}/>
                   </a>
+                  </Tooltip>
+
+                  <Tooltip title='Eliminar' arrow>
                   <a href="#" >
                   <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/>
                   </a>
+                  </Tooltip>
                   {/* <button
                     className="btn btn-outline-warning btn-sm"
                     onClick={() => handleEditar(task)}

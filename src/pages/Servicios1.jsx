@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef }  from "react"
-import {Card,CardGroup,Image,Table,Form} from "react-bootstrap"
+import {Card,CardGroup,Image,Table,Form,} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 
 import TablaGs from "components/TablaGs";
 import HeaderSer from "components/HeaderSer";
+import { Tooltip } from '@material-ui/core'
 
 import Logot3 from 'media/isotop.png';
 
@@ -92,7 +93,9 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
         
       }
 
-    
+    const formSubmit=(e)=>{
+      e.preventDefault();
+    }
 
     return (
         <div>
@@ -137,6 +140,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
                 <CardGroup className="centrar fuente3">
                     <Card className=" cardColor w-100 text-white shablack">
                         <div className="d-block centrar w-100 p-3 gap-3 ">
+                          
         <Table striped bordered hover className="borde-rad">
             <thead>
             <tr>
@@ -151,7 +155,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
         </thead>
         <tbody>
         {
-              vehiculosFiltrados.map((task,index) => 
+              vehiculosFiltrados.sort((a,b)=>a.codigo-b.codigo).map((task,index) => 
               (
                 <FilaServicio task={task} index={index} setEjecutarConsulta={setEjecutarConsulta}/>
               )
@@ -179,7 +183,33 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(servicios);
 
 const FilaServicio=({setEjecutarConsulta,task,index})=>{
 
-  
+  const [precio1, setPrecio1] = useState('')
+  const [cantidad1, setCantidad1] = useState(task.cantidad)
+  const [estado1, setEstado1] = useState(task.estado)
+  let precio2=task.precio
+  let cantidad2=task.cantidad
+  let estado2=task.estado
+
+  const handleInput = (e) => {
+    e.preventDefault()
+    /* console.log(e) */
+    /* setPrecio1(e.target.value) */
+    /* setPrecio1(precio2) */
+    precio2=(e.target.value)
+    console.log(e.target.value)
+}
+
+const handleInput1 = (e) => {
+  e.preventDefault();
+  /* setCantidad(e.target.value) */
+  cantidad2=(e.target.value)
+}
+
+const handleInput2 = (e) => {
+  e.preventDefault();
+  /* setEstado(e.target.value) */
+  estado2=(e.target.value)
+}
 
   const handleEliminar = (id) => {
     
@@ -207,18 +237,23 @@ const FilaServicio=({setEjecutarConsulta,task,index})=>{
   
   const [edit,setEdit]=useState(false)
 
-  const [editServicio, setEditServicio] = useState({
-    id: task.id,
-    codigo: task.codigo,
-    servicio: task.servicio,
-    precio: task.precio,
-    cantidad: task.cantidad,
-    estado: task.estado
-  });
+  /* const [servicioMod, setServicioMod] = useState({
+    
+  }); */
 
   const actualizarServicio = async () => {
+
+    const servicioMod ={
+      id: task.id,
+    codigo: task.codigo,
+    servicio: task.servicio,
+    precio: precio2,
+    cantidad: cantidad2,
+    estado: estado2 
+
+    }
     
-    await actualizarDocumentoDatabase ("Servicios",task.id,editServicio)
+    await actualizarDocumentoDatabase ("Servicios",task.id,servicioMod)
     setEdit(false)
    
     setEjecutarConsulta(true);
@@ -274,20 +309,29 @@ const FilaServicio=({setEjecutarConsulta,task,index})=>{
       {edit?
       
         <>
+        
             <td>
-            <input type="number" className="w-25" placeholder="precio" defaultValue={editServicio.precio}
-            onChange={(e) => setEditServicio({ ...editServicio, precio: e.target.value })}
+              
+            <input type="number" className="w-25" placeholder="precio" 
+            defaultValue={precio2}
+            onChange={handleInput}
+            
             
             />
+            
             </td>
             <td>
-            <input type="number" className="w-25" placeholder="cantidad" defaultValue={editServicio.cantidad}
-            onChange={(e) => setEditServicio({ ...editServicio, cantidad: e.target.value })}
+            <input type="number" className="w-25" placeholder="cantidad" 
+            /* value={task.cantidad} */
+            defaultValue={cantidad2}
+            onChange={handleInput1}
             />
             </td>
             <td>
-            <select className="w-50" aria-label="Default select example" defaultValue={editServicio.estado} 
-            onChange={(e) => setEditServicio({ ...editServicio, estado: e.target.value })}
+            <select className="w-50" aria-label="Default select example" 
+            /* value={task.estado} */
+            defaultValue={estado2}
+            onChange={handleInput2}
             
             required>
                         <option >Selecciona</option>
@@ -295,6 +339,7 @@ const FilaServicio=({setEjecutarConsulta,task,index})=>{
                         <option value="No Disponible">No Disponible</option>
                     </select>
             </td>
+           
 
         </> 
 
@@ -315,19 +360,38 @@ const FilaServicio=({setEjecutarConsulta,task,index})=>{
                   
                   
                   <td>
-                  <a href="#" className="mx-2">
-                    {edit? <ImCheckboxChecked className="text-success"  onClick={() => actualizarServicio()}/> 
-                    :
-                    <BsPencilSquare className="text-primary"  onClick={() => setEdit(!edit)}/>}
                   
-                  </a>
-                  <a href="#" >
-                    {edit? <MdCancel className="text-warning" onClick={() => setEdit(!edit)}/>
+                    {edit? 
+                    
+                    <Tooltip title='Actualizar' arrow>
+                      <a href="#"className="mx-2">
+                        <ImCheckboxChecked className="text-success"  onClick={() => actualizarServicio()}/> 
+                        </a>
+                    </Tooltip>
+                    
                     :
-                    <BsTrash className="text-danger" onClick={() => notifyEliminar()}/>
+                    
+                    <Tooltip title='Editar' arrow>
+                      <a href="#" className="mx-2">
+                        <BsPencilSquare className="text-primary"  onClick={() => setEdit(!edit)}/>
+                        </a>
+                    </Tooltip>
+                    
+                    }
+                    {edit? 
+                    <Tooltip title='Cancelar' arrow>
+                    <a href="#"className="mx-2">
+                      <MdCancel className="text-warning" onClick={() => setEdit(!edit)}/>
+                      </a>
+                    </Tooltip>
+                    :
+                    <Tooltip title='Eliminar' arrow>
+                      <a href="#"className="mx-2">
+                      <BsTrash className="text-danger" onClick={() => notifyEliminar()}/>
+                      </a>
+                    </Tooltip>
                     }
                   
-                  </a>
                   </td>
                 </tr>
 

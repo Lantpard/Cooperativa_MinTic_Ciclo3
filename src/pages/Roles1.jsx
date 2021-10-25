@@ -3,7 +3,7 @@ import {Form, Table, Card,CardGroup,Image} from "react-bootstrap"
 /* import { BrowserRouter as Router, Switch, Route } from "react-router-dom" */
 import Acciones2 from "components/Acciones2";
 import {upDatabase,database,consultarDatabase,guardarDatabase,consultarDocumentoDatabase,actualizarDocumentoDatabase} from 'firebase'
-
+import { Tooltip } from '@material-ui/core'
 import Logot3 from 'media/isotop.png';
 
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
@@ -89,7 +89,17 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(roles);
         
       }
 
-    
+    //Comparer Function    
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a[prop] > b[prop]) {    
+          return 1;    
+      } else if (a[prop] < b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+}    
 
 
     return (
@@ -151,7 +161,7 @@ const [vehiculosFiltrados, setVehiculosFiltrados] = useState(roles);
         </thead>
         <tbody>
         {
-              vehiculosFiltrados.map((task,index) => 
+              vehiculosFiltrados.sort(GetSortOrder("email")).map((task,index) => 
               (
                 <FilaRol task={task} index={index} setEjecutarConsulta={setEjecutarConsulta}/>
               )
@@ -294,21 +304,37 @@ const FilaRol=({setEjecutarConsulta,task,index})=>{
                   
                   
                   <td>
-                  <a href="#" className="mx-2">
-                    {edit? <ImCheckboxChecked className="text-success"  onClick={() => ActualizarRol()}/> 
-                    :
-                    <BsPencilSquare className="text-primary"  onClick={() => setEdit(!edit)}/>}
                   
-                  </a>
-                  <a href="#" >
-                    {edit? <MdCancel className="text-warning" onClick={() => setEdit(!edit)}/>
+                    {edit? 
+                    <Tooltip title='Actualizar' arrow>
+                    <a href="#"className="mx-2">
+                    <ImCheckboxChecked className="text-success"  onClick={() => ActualizarRol()}/> 
+                    </a>
+                    </Tooltip>
                     :
-                    <>
-                    {/* <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/> */}
-                    </>
+                    <Tooltip title='Editar' arrow>
+                      <a href="#"className="mx-2">
+                    <BsPencilSquare className="text-primary"  onClick={() => setEdit(!edit)}/>
+                    </a>
+                    </Tooltip>
                     }
                   
-                  </a>
+                    {edit? 
+                    <Tooltip title='Cancelar' arrow>
+                    <a href="#"className="mx-2">
+                    <MdCancel className="text-warning" onClick={() => setEdit(!edit)}/>
+                    </a>
+                    </Tooltip>
+                    :
+                    <>
+                    {/* <Tooltip title='Eliminar' arrow>
+                      <a href="#"className="mx-2">
+                      <BsTrash className="text-danger" onClick={() => handleEliminar(task.id)}/> 
+                      </a>
+                    </Tooltip> */}
+                        </>
+                    }
+
                   </td>
                 </tr>
 

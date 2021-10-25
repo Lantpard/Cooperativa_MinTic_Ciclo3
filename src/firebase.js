@@ -248,7 +248,7 @@ export const logOutUsuario = async () => {
 }
 
 // Usuario Activo
-onAuthStateChanged(auth, (user) => {
+/* onAuthStateChanged(auth, (user) => {
 
   if (user) {
     usuario = user
@@ -259,4 +259,4 @@ onAuthStateChanged(auth, (user) => {
     usuario = undefined
   }
 
-})
+}) */
